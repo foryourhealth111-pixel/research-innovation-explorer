@@ -1,0 +1,2 @@
+date,query,source,reason,key_findings,follow_up
+2026-04-20,"long-context reasoning recent papers","Semantic Scholar","broad topic scan","Found several 2024-2026 survey and benchmark papers","add the strongest papers to paper-pool.csv"

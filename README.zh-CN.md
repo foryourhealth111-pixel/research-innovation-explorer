@@ -1,0 +1,161 @@
+<div align="center">
+
+# Research Innovation Explorer
+
+**一个宿主中立、搜索优先的研究创新点探索技能，用于文献驱动的 idea 发现、理论包装与高质量 Markdown 报告生成。**
+
+[English README](./README.md)
+
+[![GitHub stars](https://img.shields.io/github/stars/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
+[![GitHub repo size](https://img.shields.io/github/repo-size/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
+![宿主中立](https://img.shields.io/badge/宿主中立-host--neutral-111827?style=flat-square)
+![搜索优先](https://img.shields.io/badge/搜索优先-search--first-0f766e?style=flat-square)
+![报告输出](https://img.shields.io/badge/报告输出-Markdown%20%2B%20可视化-7c3aed?style=flat-square)
+
+</div>
+
+## 这个仓库解决什么问题
+
+很多“找创新点”的流程会卡在三件事上：
+
+- 只靠印象找论文，没有系统检索
+- 能拼组合，但讲不清为什么这个组合成立
+- 做完分析后没有形成可读、可分享、可追溯的报告
+
+`research-innovation-explorer` 的设计目标，就是把这三件事接起来：
+
+1. 先做系统搜索，再做判断。
+2. 把论文拆成可复用能力，而不是只看标题。
+3. 生成并筛选组合候选。
+4. 对最强候选做诚实的理论表达。
+5. 最终输出一份优雅的 Markdown 报告，包含参考文献、分析依据和可视化摘要。
+
+## 你会得到什么
+
+| 层级 | 作用 |
+| --- | --- |
+| `SKILL.md` | 定义完整流程、判断规则与交付要求 |
+| `scripts/build_search_queries.py` | 生成主题扫描、新颖性检查、失败分析等查询包 |
+| `scripts/build_idea_matrix.py` | 从论文池生成组合候选矩阵并评分 |
+| `scripts/build_markdown_report.py` | 生成带 Mermaid 图、证据表和参考文献的 Markdown 报告草稿 |
+| `references/` | 放置搜索手册、理论表达规则、报告规范和边界约束 |
+| `assets/templates/` | 提供搜索日志、论文池、idea brief、实验计划和报告模板 |
+
+## 工作流
+
+```mermaid
+flowchart LR
+    A[搜索阶段] --> B[论文池]
+    B --> C[能力拆解]
+    C --> D[组合矩阵]
+    D --> E[候选筛选]
+    E --> F[理论表达]
+    F --> G[实验设计]
+    G --> H[Markdown 报告]
+```
+
+## 设计原则
+
+### 1. 搜索优先
+
+只要当前环境具备搜索能力，就不应该仅凭记忆去做“最新文献”判断。
+
+### 2. 理论表达要诚实
+
+这个技能支持统一框架、极端特例、控制变量等写法，但前提是这些表达真的能被定义、解释和验证。
+
+### 3. 报告要带证据
+
+最终输出的 Markdown 文档不只是“结论合集”，而是必须包含：
+
+- 参考文献
+- 分析依据
+- 候选比较
+- 可视化摘要
+
+### 4. 宿主中立
+
+这里沉淀的是工作流本身，而不是某一个 agent 平台的专属写法。无论是支持 Skills 的宿主，还是手工执行，都可以复用。
+
+## 快速开始
+
+### 1. 先生成查询包
+
+```bash
+python scripts/build_search_queries.py \
+  --topic "long-context reasoning" \
+  --keywords "memory routing, verifier head, benchmark"
+```
+
+### 2. 准备论文池
+
+从这些模板开始：
+
+- `assets/templates/search-log.csv`
+- `assets/templates/paper-pool.csv`
+
+### 3. 生成组合矩阵
+
+```bash
+python scripts/build_idea_matrix.py \
+  assets/templates/paper-pool.csv \
+  --output work/idea-matrix.csv
+```
+
+### 4. 生成 Markdown 报告
+
+```bash
+python scripts/build_markdown_report.py \
+  --topic "Long-Context Reasoning" \
+  --paper-pool assets/templates/paper-pool.csv \
+  --idea-matrix work/idea-matrix.csv \
+  --search-log assets/templates/search-log.csv \
+  --output work/report.md
+```
+
+## 输出风格
+
+报告层默认采用 GitHub 友好的视觉结构：
+
+- Mermaid 流程图，用来解释流程与逻辑
+- Mermaid 饼图，用来快速展示分布
+- Markdown 证据表，用来承载“分析依据”
+- 简洁段落，用来承载 summary 和 detailed analysis
+
+这样既适合工作中快速阅读，也适合作为可分享的研究 memo。
+
+## 仓库结构
+
+```text
+.
+├── SKILL.md
+├── README.md
+├── README.zh-CN.md
+├── agents/
+│   └── openai.yaml
+├── assets/
+│   └── templates/
+├── references/
+└── scripts/
+```
+
+## 适用场景
+
+- 挖掘增量但可辩护的研究创新点
+- 在真正动手实现之前，先把文献图谱拉清楚
+- 检查某个 A+B 组合是否已经在论文或代码里出现过
+- 输出一份高质量、带引用、带可视化的研究分析文档
+- 训练文献检索、方法抽象、实验设计和研究写作能力
+
+## 文档入口
+
+- 主流程：[`SKILL.md`](./SKILL.md)
+- 搜索手册：[`references/search-playbook.md`](./references/search-playbook.md)
+- 理论表达：[`references/framing-and-theory.md`](./references/framing-and-theory.md)
+- 报告规范：[`references/reporting-and-visualization.md`](./references/reporting-and-visualization.md)
+- 报告模板：[`assets/templates/analysis-report-template.md`](./assets/templates/analysis-report-template.md)
+
+## 说明
+
+- 如果宿主不能渲染 Mermaid，就保留 Markdown 表格，并把 Mermaid 替换成静态图片或纯文本摘要。
+- 如果当前环境没有搜索能力，可以手工执行这套流程，但应明确降低对“当前文献结论”的置信度。

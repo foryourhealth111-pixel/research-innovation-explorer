@@ -1,0 +1,3 @@
+paper_id,title,venue,year,url,open_source,task,modules,strengths,weaknesses,benchmarks,tags,notes
+A01,Example Paper A,NeurIPS,2025,https://example.com/a,yes,long-context reasoning,external memory;retrieval gate,strong long-context retention;low latency,weak on precise grounding;memory quality sensitive,LongBench;NIAH,reasoning;memory,replace with a real paper
+B01,Example Paper B,ICLR,2025,https://example.com/b,yes,long-context reasoning,verifier head;iterative refinement,strong grounded answers;strong uncertainty control,weak on latency;extra decode cost,LongBench;NIAH,reasoning;verification,replace with a real paper

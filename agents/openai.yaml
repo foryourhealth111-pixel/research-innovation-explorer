@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Innovation Explorer"
+  short_description: "Search-first research idea discovery and reporting"
+  default_prompt: "Use $research-innovation-explorer to search broadly, score A+B candidates, and produce a polished Markdown report with citations and visual summaries."
