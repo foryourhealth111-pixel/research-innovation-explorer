@@ -58,7 +58,6 @@ This is the operational core of the workflow, not a side note. The point is not 
 | `scripts/build_idea_matrix.py` | Builds a scored pairwise candidate matrix from the paper pool |
 | `scripts/build_markdown_report.py` | Scaffolds a polished Markdown report with Mermaid visuals, evidence tables, and references |
 | `references/` | Contains the search playbook, theory framing rules, reporting rules, and ethics boundaries |
-| `assets/examples/` | README-ready visuals that show how the literature matrix can be presented in a final report |
 | `assets/templates/` | Provides ready-to-use CSV and Markdown templates for search logs, paper pools, idea briefs, experiment plans, and reports |
 
 ## Workflow
@@ -138,7 +137,7 @@ python scripts/build_markdown_report.py \
 The reporting layer is intentionally designed for GitHub-native reading:
 
 - Mermaid flowcharts for process explanation
-- matrix visuals for candidate-screening summaries
+- LaTeX matrix heatmaps for candidate-screening summaries
 - Mermaid pie charts for quick distribution views
 - Markdown evidence tables for claim tracing
 - compact narrative sections for executive summary and detailed analysis
@@ -149,11 +148,29 @@ This makes the output readable both as a working note and as a shareable artifac
 
 ### Literature Review Matrix
 
-Below is a stylized example of the matrix view this workflow can produce. It shows a zoomed excerpt from a `40 x 40` directional review matrix: self-pairs are masked, darker cells indicate stronger `A + B` potential, and gold-outlined cells represent candidates that survived search-backed validation and moved into the shortlist.
+Below is a README-native LaTeX heatmap example. It shows a zoomed excerpt from a `40 x 40` directional review matrix: self-pairs are masked, darker cells indicate stronger `A + B` potential, and gold-outlined cells represent candidates that survived search-backed validation and moved into the shortlist.
 
-![Literature review matrix example](./assets/examples/literature-matrix-example-en.svg)
+```math
+\begin{array}{c|cccccccc}
+ & P01 & P02 & P03 & P04 & P05 & P06 & P07 & P08 \\
+\hline
+P01 & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.37} & \bbox[#0F766E,4px]{\color{white}{0.86}} & \bbox[#BEE4DC,4px]{0.61} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#72C6B5,4px]{0.72} \\
+P02 & \bbox[#BEE4DC,4px]{0.63} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.48} & \bbox[#72C6B5,4px]{0.74} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.92}} & \bbox[#EAF5F2,4px]{0.39} & \bbox[#BEE4DC,4px]{0.64} & \bbox[#0F766E,4px]{\color{white}{0.84}} \\
+P03 & \bbox[#EAF5F2,4px]{0.36} & \bbox[#BEE4DC,4px]{0.59} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#BEE4DC,4px]{0.62} & \bbox[#EAF5F2,4px]{0.40} & \bbox[#72C6B5,4px]{0.73} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#EAF5F2,4px]{0.45} \\
+P04 & \bbox[#BEE4DC,4px]{0.55} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.71} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.87}} & \bbox[#EAF5F2,4px]{0.38} & \bbox[#BEE4DC,4px]{0.57} & \bbox[#72C6B5,4px]{0.76} \\
+P05 & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.89}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.42} & \bbox[#72C6B5,4px]{0.70} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.85}} & \bbox[#BEE4DC,4px]{0.56} & \bbox[#EAF5F2,4px]{0.34} \\
+P06 & \bbox[#EAF5F2,4px]{0.47} & \bbox[#0F766E,4px]{\color{white}{0.82}} & \bbox[#BEE4DC,4px]{0.65} & \bbox[#EAF5F2,4px]{0.46} & \bbox[#72C6B5,4px]{0.75} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.81}} & \bbox[#BEE4DC,4px]{0.54} \\
+P07 & \bbox[#BEE4DC,4px]{0.52} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#0F766E,4px]{\color{white}{0.84}} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.49} & \bbox[#72C6B5,4px]{0.72} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.87}} \\
+P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.74} & \bbox[#D7D3CC,4px]{\phantom{0.00}}
+\end{array}
+```
 
-Use this kind of visual in the final Markdown report when you want the screening logic to be legible at a glance, instead of leaving the shortlist as prose only.
+Legend:
+- gray diagonal cells: self-pairs removed
+- lighter to darker green: weaker to stronger combination potential
+- gold outline: combinations that survived search-backed screening and entered the shortlist
+
+Use this kind of LaTeX-native visual in the final Markdown report when you want the screening logic to be legible at a glance, instead of leaving the shortlist as prose only.
 
 ## Repository Layout
 
@@ -165,7 +182,6 @@ Use this kind of visual in the final Markdown report when you want the screening
 ├── agents/
 │   └── openai.yaml
 ├── assets/
-│   ├── examples/
 │   └── templates/
 ├── references/
 └── scripts/

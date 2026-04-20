@@ -58,7 +58,6 @@
 | `scripts/build_idea_matrix.py` | 从论文池生成组合候选矩阵并评分 |
 | `scripts/build_markdown_report.py` | 生成带 Mermaid 图、证据表和参考文献的 Markdown 报告草稿 |
 | `references/` | 放置搜索手册、理论表达规则、报告规范和边界约束 |
-| `assets/examples/` | 放置 README 可直接展示的示例视觉稿，用于说明矩阵结果应该如何呈现 |
 | `assets/templates/` | 提供搜索日志、论文池、idea brief、实验计划和报告模板 |
 
 ## 工作流
@@ -138,7 +137,7 @@ python scripts/build_markdown_report.py \
 报告层默认采用 GitHub 友好的视觉结构：
 
 - Mermaid 流程图，用来解释流程与逻辑
-- 文献矩阵图，用来概览候选筛选结果
+- LaTeX 矩阵热力图，用来概览候选筛选结果
 - Mermaid 饼图，用来快速展示分布
 - Markdown 证据表，用来承载“分析依据”
 - 简洁段落，用来承载 summary 和 detailed analysis
@@ -149,11 +148,29 @@ python scripts/build_markdown_report.py \
 
 ### 综述文献矩阵
 
-下面这张图演示了这个工作流最终可以产出的矩阵视图。它展示的是一个 `40 x 40` 方向敏感综述矩阵的局部放大图：对角线位置表示自组合，已被屏蔽；颜色越深表示 `A + B` 组合潜力越强；金色描边表示那些经过搜索和快速验证之后进入 shortlist 的候选。
+下面这个示例直接使用 README 原生的 LaTeX 热力矩阵来表达筛选结果。它展示的是一个 `40 x 40` 方向敏感综述矩阵的局部放大图：对角线位置表示自组合，已被屏蔽；颜色越深表示 `A + B` 组合潜力越强；金色描边表示那些经过搜索和快速验证之后进入 shortlist 的候选。
 
-![综述文献矩阵示例](./assets/examples/literature-matrix-example-zh-CN.svg)
+```math
+\begin{array}{c|cccccccc}
+ & P01 & P02 & P03 & P04 & P05 & P06 & P07 & P08 \\
+\hline
+P01 & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.37} & \bbox[#0F766E,4px]{\color{white}{0.86}} & \bbox[#BEE4DC,4px]{0.61} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#72C6B5,4px]{0.72} \\
+P02 & \bbox[#BEE4DC,4px]{0.63} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.48} & \bbox[#72C6B5,4px]{0.74} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.92}} & \bbox[#EAF5F2,4px]{0.39} & \bbox[#BEE4DC,4px]{0.64} & \bbox[#0F766E,4px]{\color{white}{0.84}} \\
+P03 & \bbox[#EAF5F2,4px]{0.36} & \bbox[#BEE4DC,4px]{0.59} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#BEE4DC,4px]{0.62} & \bbox[#EAF5F2,4px]{0.40} & \bbox[#72C6B5,4px]{0.73} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#EAF5F2,4px]{0.45} \\
+P04 & \bbox[#BEE4DC,4px]{0.55} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.71} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.87}} & \bbox[#EAF5F2,4px]{0.38} & \bbox[#BEE4DC,4px]{0.57} & \bbox[#72C6B5,4px]{0.76} \\
+P05 & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.89}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.42} & \bbox[#72C6B5,4px]{0.70} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.85}} & \bbox[#BEE4DC,4px]{0.56} & \bbox[#EAF5F2,4px]{0.34} \\
+P06 & \bbox[#EAF5F2,4px]{0.47} & \bbox[#0F766E,4px]{\color{white}{0.82}} & \bbox[#BEE4DC,4px]{0.65} & \bbox[#EAF5F2,4px]{0.46} & \bbox[#72C6B5,4px]{0.75} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.81}} & \bbox[#BEE4DC,4px]{0.54} \\
+P07 & \bbox[#BEE4DC,4px]{0.52} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#0F766E,4px]{\color{white}{0.84}} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.49} & \bbox[#72C6B5,4px]{0.72} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.87}} \\
+P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.74} & \bbox[#D7D3CC,4px]{\phantom{0.00}}
+\end{array}
+```
 
-如果你希望最终 Markdown 报告不只是“列一个候选清单”，而是能让读者一眼看懂筛选逻辑，就应该把这类矩阵图和证据表一起放进去。
+图例说明：
+- 灰色对角线：自组合，直接移除
+- 绿色从浅到深：组合潜力从弱到强
+- 金色描边：经过搜索支撑和快速验证后进入 shortlist 的候选
+
+如果你希望最终 Markdown 报告不只是“列一个候选清单”，而是能让读者一眼看懂筛选逻辑，就应该把这种 LaTeX 原生矩阵图和证据表一起放进去。
 
 ## 仓库结构
 
@@ -165,7 +182,6 @@ python scripts/build_markdown_report.py \
 ├── agents/
 │   └── openai.yaml
 ├── assets/
-│   ├── examples/
 │   └── templates/
 ├── references/
 └── scripts/
