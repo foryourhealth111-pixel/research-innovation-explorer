@@ -154,14 +154,14 @@ python scripts/build_markdown_report.py \
 \begin{array}{c|cccccccc}
  & P01 & P02 & P03 & P04 & P05 & P06 & P07 & P08 \\
 \hline
-P01 & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.37} & \bbox[#0F766E,4px]{\color{white}{0.86}} & \bbox[#BEE4DC,4px]{0.61} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#72C6B5,4px]{0.72} \\
-P02 & \bbox[#BEE4DC,4px]{0.63} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#EAF5F2,4px]{0.48} & \bbox[#72C6B5,4px]{0.74} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.92}} & \bbox[#EAF5F2,4px]{0.39} & \bbox[#BEE4DC,4px]{0.64} & \bbox[#0F766E,4px]{\color{white}{0.84}} \\
-P03 & \bbox[#EAF5F2,4px]{0.36} & \bbox[#BEE4DC,4px]{0.59} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#BEE4DC,4px]{0.62} & \bbox[#EAF5F2,4px]{0.40} & \bbox[#72C6B5,4px]{0.73} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#EAF5F2,4px]{0.45} \\
-P04 & \bbox[#BEE4DC,4px]{0.55} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.71} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.87}} & \bbox[#EAF5F2,4px]{0.38} & \bbox[#BEE4DC,4px]{0.57} & \bbox[#72C6B5,4px]{0.76} \\
-P05 & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.89}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.42} & \bbox[#72C6B5,4px]{0.70} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.85}} & \bbox[#BEE4DC,4px]{0.56} & \bbox[#EAF5F2,4px]{0.34} \\
-P06 & \bbox[#EAF5F2,4px]{0.47} & \bbox[#0F766E,4px]{\color{white}{0.82}} & \bbox[#BEE4DC,4px]{0.65} & \bbox[#EAF5F2,4px]{0.46} & \bbox[#72C6B5,4px]{0.75} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px]{\color{white}{0.81}} & \bbox[#BEE4DC,4px]{0.54} \\
-P07 & \bbox[#BEE4DC,4px]{0.52} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#0F766E,4px]{\color{white}{0.84}} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.49} & \bbox[#72C6B5,4px]{0.72} & \bbox[#D7D3CC,4px]{\phantom{0.00}} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.87}} \\
-P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.74} & \bbox[#D7D3CC,4px]{\phantom{0.00}}
+P01 & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.37} & \bbox[#0F766E,4px]{\color{white}{0.86}} & \bbox[#BEE4DC,4px]{0.61} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#72C6B5,4px]{0.72} \\
+P02 & \bbox[#BEE4DC,4px]{0.63} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#EAF5F2,4px]{0.48} & \bbox[#72C6B5,4px]{0.74} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.92}} & \bbox[#EAF5F2,4px]{0.39} & \bbox[#BEE4DC,4px]{0.64} & \bbox[#0F766E,4px]{\color{white}{0.84}} \\
+P03 & \bbox[#EAF5F2,4px]{0.36} & \bbox[#BEE4DC,4px]{0.59} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#BEE4DC,4px]{0.62} & \bbox[#EAF5F2,4px]{0.40} & \bbox[#72C6B5,4px]{0.73} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#EAF5F2,4px]{0.45} \\
+P04 & \bbox[#BEE4DC,4px]{0.55} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.71} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.87}} & \bbox[#EAF5F2,4px]{0.38} & \bbox[#BEE4DC,4px]{0.57} & \bbox[#72C6B5,4px]{0.76} \\
+P05 & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.89}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.42} & \bbox[#72C6B5,4px]{0.70} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.85}} & \bbox[#BEE4DC,4px]{0.56} & \bbox[#EAF5F2,4px]{0.34} \\
+P06 & \bbox[#EAF5F2,4px]{0.47} & \bbox[#0F766E,4px]{\color{white}{0.82}} & \bbox[#BEE4DC,4px]{0.65} & \bbox[#EAF5F2,4px]{0.46} & \bbox[#72C6B5,4px]{0.75} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.81}} & \bbox[#BEE4DC,4px]{0.54} \\
+P07 & \bbox[#BEE4DC,4px]{0.52} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#0F766E,4px]{\color{white}{0.84}} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.49} & \bbox[#72C6B5,4px]{0.72} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.87}} \\
+P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.74} & \bbox[#D7D3CC,4px]{\text{diag}}
 \end{array}
 ```
 
