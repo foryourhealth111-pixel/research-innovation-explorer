@@ -137,7 +137,7 @@ python scripts/build_markdown_report.py \
 报告层默认采用 GitHub 友好的视觉结构：
 
 - Mermaid 流程图，用来解释流程与逻辑
-- LaTeX 矩阵热力图，用来概览候选筛选结果
+- 静态 PNG 热力图，用来稳定展示矩阵快照和真实用例
 - Mermaid 饼图，用来快速展示分布
 - Markdown 证据表，用来承载“分析依据”
 - 简洁段落，用来承载 summary 和 detailed analysis
@@ -146,31 +146,25 @@ python scripts/build_markdown_report.py \
 
 ## 使用示例
 
-### 综述文献矩阵
+### 研究大语言模型训练方向
 
-下面这个示例直接使用 README 原生的 LaTeX 热力矩阵来表达筛选结果。它展示的是一个 `40 x 40` 方向敏感综述矩阵的局部放大图：对角线位置表示自组合，已被屏蔽；颜色越深表示 `A + B` 组合潜力越强；金色描边表示那些经过搜索和快速验证之后进入 shortlist 的候选。
+这个用例把“大语言模型训练前沿”作为目标主题。流程从大规模搜索开始，先收集大约 40 篇最新的、顶会的、Oral 级别的、开源的、业界认可的优质论文，建立一个方向敏感的 `40 x 40` 组合矩阵，移除对角线之后得到 `1560` 个 `A + B` 候选，再通过搜索补充、代码检查和轻量验证把空间压缩到最终 shortlist。
 
-```math
-\begin{array}{c|cccccccc}
- & P01 & P02 & P03 & P04 & P05 & P06 & P07 & P08 \\
-\hline
-P01 & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.37} & \bbox[#0F766E,4px]{\color{white}{0.86}} & \bbox[#BEE4DC,4px]{0.61} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#72C6B5,4px]{0.72} \\
-P02 & \bbox[#BEE4DC,4px]{0.63} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#EAF5F2,4px]{0.48} & \bbox[#72C6B5,4px]{0.74} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.92}} & \bbox[#EAF5F2,4px]{0.39} & \bbox[#BEE4DC,4px]{0.64} & \bbox[#0F766E,4px]{\color{white}{0.84}} \\
-P03 & \bbox[#EAF5F2,4px]{0.36} & \bbox[#BEE4DC,4px]{0.59} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#BEE4DC,4px]{0.62} & \bbox[#EAF5F2,4px]{0.40} & \bbox[#72C6B5,4px]{0.73} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#EAF5F2,4px]{0.45} \\
-P04 & \bbox[#BEE4DC,4px]{0.55} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.71} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.87}} & \bbox[#EAF5F2,4px]{0.38} & \bbox[#BEE4DC,4px]{0.57} & \bbox[#72C6B5,4px]{0.76} \\
-P05 & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.89}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.42} & \bbox[#72C6B5,4px]{0.70} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.85}} & \bbox[#BEE4DC,4px]{0.56} & \bbox[#EAF5F2,4px]{0.34} \\
-P06 & \bbox[#EAF5F2,4px]{0.47} & \bbox[#0F766E,4px]{\color{white}{0.82}} & \bbox[#BEE4DC,4px]{0.65} & \bbox[#EAF5F2,4px]{0.46} & \bbox[#72C6B5,4px]{0.75} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px]{\color{white}{0.81}} & \bbox[#BEE4DC,4px]{0.54} \\
-P07 & \bbox[#BEE4DC,4px]{0.52} & \bbox[#EAF5F2,4px]{0.41} & \bbox[#0F766E,4px]{\color{white}{0.84}} & \bbox[#BEE4DC,4px]{0.58} & \bbox[#EAF5F2,4px]{0.49} & \bbox[#72C6B5,4px]{0.72} & \bbox[#D7D3CC,4px]{\text{diag}} & \bbox[#0F766E,4px,border:2px solid #C0841A]{\color{white}{0.87}} \\
-P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0.44} & \bbox[#0F766E,4px]{\color{white}{0.83}} & \bbox[#BEE4DC,4px]{0.60} & \bbox[#EAF5F2,4px]{0.43} & \bbox[#72C6B5,4px]{0.74} & \bbox[#D7D3CC,4px]{\text{diag}}
-\end{array}
-```
+在综述层，工作流会先把文献空间变成可读的主题交互矩阵，而不是只给一堆论文标题：
 
-图例说明：
-- 灰色对角线：自组合，直接移除
-- 绿色从浅到深：组合潜力从弱到强
-- 金色描边：经过搜索支撑和快速验证后进入 shortlist 的候选
+![LLM 训练主题交互矩阵](./assets/examples/llm-training/theme_interaction_heatmap.zh-CN.png)
 
-如果你希望最终 Markdown 报告不只是“列一个候选清单”，而是能让读者一眼看懂筛选逻辑，就应该把这种 LaTeX 原生矩阵图和证据表一起放进去。
+在决策层，工作流再把最终 shortlist 压缩成一个结果矩阵，把新颖性空间、实现可行性、评测清晰度、开源成熟度和叙事锋利度直接摊开：
+
+![LLM 训练 shortlist 评估热力图](./assets/examples/llm-training/shortlist_heatmap.zh-CN.png)
+
+这个用例想表达的重点是：
+
+- 搜索不只是前置动作，在分析阶段也会持续使用
+- `40 x 40 -> 1560 -> ~15` 的收缩过程是显式的、可复查的
+- GitHub README 和 Markdown 报告可以直接用图片承载筛选逻辑，不依赖宿主侧的数学渲染
+
+仓库内置的示例图片位于 [`assets/examples/llm-training/`](./assets/examples/llm-training/)，英文版图片可通过 [`scripts/build_llm_training_example_figures.py`](./scripts/build_llm_training_example_figures.py) 重新生成。
 
 ## 仓库结构
 
@@ -182,9 +176,15 @@ P08 & \bbox[#72C6B5,4px]{0.71} & \bbox[#BEE4DC,4px]{0.53} & \bbox[#EAF5F2,4px]{0
 ├── agents/
 │   └── openai.yaml
 ├── assets/
+│   ├── examples/
+│   │   └── llm-training/
 │   └── templates/
 ├── references/
 └── scripts/
+    ├── build_idea_matrix.py
+    ├── build_llm_training_example_figures.py
+    ├── build_markdown_report.py
+    └── build_search_queries.py
 ```
 
 ## 适用场景
