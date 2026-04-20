@@ -58,6 +58,7 @@ This is the operational core of the workflow, not a side note. The point is not 
 | `scripts/build_idea_matrix.py` | Builds a scored pairwise candidate matrix from the paper pool |
 | `scripts/build_markdown_report.py` | Scaffolds a polished Markdown report with Mermaid visuals, evidence tables, and references |
 | `references/` | Contains the search playbook, theory framing rules, reporting rules, and ethics boundaries |
+| `assets/examples/` | README-ready visuals that show how the literature matrix can be presented in a final report |
 | `assets/templates/` | Provides ready-to-use CSV and Markdown templates for search logs, paper pools, idea briefs, experiment plans, and reports |
 
 ## Workflow
@@ -137,11 +138,22 @@ python scripts/build_markdown_report.py \
 The reporting layer is intentionally designed for GitHub-native reading:
 
 - Mermaid flowcharts for process explanation
+- matrix visuals for candidate-screening summaries
 - Mermaid pie charts for quick distribution views
 - Markdown evidence tables for claim tracing
 - compact narrative sections for executive summary and detailed analysis
 
 This makes the output readable both as a working note and as a shareable artifact.
+
+## Example Output
+
+### Literature Review Matrix
+
+Below is a stylized example of the matrix view this workflow can produce. It shows a zoomed excerpt from a `40 x 40` directional review matrix: self-pairs are masked, darker cells indicate stronger `A + B` potential, and gold-outlined cells represent candidates that survived search-backed validation and moved into the shortlist.
+
+![Literature review matrix example](./assets/examples/literature-matrix-example-en.svg)
+
+Use this kind of visual in the final Markdown report when you want the screening logic to be legible at a glance, instead of leaving the shortlist as prose only.
 
 ## Repository Layout
 
@@ -153,6 +165,7 @@ This makes the output readable both as a working note and as a shareable artifac
 ├── agents/
 │   └── openai.yaml
 ├── assets/
+│   ├── examples/
 │   └── templates/
 ├── references/
 └── scripts/

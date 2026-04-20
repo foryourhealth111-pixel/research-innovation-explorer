@@ -58,6 +58,7 @@
 | `scripts/build_idea_matrix.py` | 从论文池生成组合候选矩阵并评分 |
 | `scripts/build_markdown_report.py` | 生成带 Mermaid 图、证据表和参考文献的 Markdown 报告草稿 |
 | `references/` | 放置搜索手册、理论表达规则、报告规范和边界约束 |
+| `assets/examples/` | 放置 README 可直接展示的示例视觉稿，用于说明矩阵结果应该如何呈现 |
 | `assets/templates/` | 提供搜索日志、论文池、idea brief、实验计划和报告模板 |
 
 ## 工作流
@@ -137,11 +138,22 @@ python scripts/build_markdown_report.py \
 报告层默认采用 GitHub 友好的视觉结构：
 
 - Mermaid 流程图，用来解释流程与逻辑
+- 文献矩阵图，用来概览候选筛选结果
 - Mermaid 饼图，用来快速展示分布
 - Markdown 证据表，用来承载“分析依据”
 - 简洁段落，用来承载 summary 和 detailed analysis
 
 这样既适合工作中快速阅读，也适合作为可分享的研究 memo。
+
+## 使用示例
+
+### 综述文献矩阵
+
+下面这张图演示了这个工作流最终可以产出的矩阵视图。它展示的是一个 `40 x 40` 方向敏感综述矩阵的局部放大图：对角线位置表示自组合，已被屏蔽；颜色越深表示 `A + B` 组合潜力越强；金色描边表示那些经过搜索和快速验证之后进入 shortlist 的候选。
+
+![综述文献矩阵示例](./assets/examples/literature-matrix-example-zh-CN.svg)
+
+如果你希望最终 Markdown 报告不只是“列一个候选清单”，而是能让读者一眼看懂筛选逻辑，就应该把这类矩阵图和证据表一起放进去。
 
 ## 仓库结构
 
@@ -153,6 +165,7 @@ python scripts/build_markdown_report.py \
 ├── agents/
 │   └── openai.yaml
 ├── assets/
+│   ├── examples/
 │   └── templates/
 ├── references/
 └── scripts/
