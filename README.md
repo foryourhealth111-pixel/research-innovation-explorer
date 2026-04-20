@@ -159,3 +159,7 @@ This makes the output readable both as a working note and as a shareable artifac
 
 - If your host cannot render Mermaid, keep the Markdown tables and replace Mermaid blocks with static images or plain-text summaries.
 - If your host has no search capability, use the workflow manually and explicitly downgrade confidence in current-literature claims.
+
+## Community
+
+For broader discussion around tools, workflows, and AI-native building, visit [linux.do](https://linux.do/).
