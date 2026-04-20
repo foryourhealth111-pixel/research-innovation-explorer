@@ -30,6 +30,25 @@ Most research-idea workflows fail in one of three ways:
 4. Frame the strongest hypothesis honestly.
 5. Finish with a polished Markdown report that includes citations, analysis basis, and visual summaries.
 
+## Core Methodology
+
+This skill is built around one explicit research-production loop:
+
+1. Collect roughly 40 recent, top-tier, oral-level, open-source, industry-recognized papers.
+2. Build a `40 x 40` directional combination matrix over those papers.
+3. Remove the diagonal self-pairs and keep the remaining `40 x 39 = 1560` possible `A + B` combinations.
+4. Run fast logical checks, lightweight experiments, and targeted search passes on those 1560 candidates.
+5. Use the evidence to filter the space down to roughly 15 ideas that are actually defensible and runnable.
+
+This is the operational core of the workflow, not a side note. The point is not to wait for a single flash of inspiration. The point is to search comprehensively, force structured combination, validate aggressively, and only then keep the few ideas that survive contact with evidence.
+
+| Stage | What to do | What comes out |
+| --- | --- | --- |
+| Paper pool | Gather around 40 strong recent papers with code and real impact | a reusable capability inventory |
+| Combination pass | Enumerate the `40 x 40` space and remove self-pairs | 1560 directional `A + B` candidates |
+| Fast validation | Search prior work, inspect code, run quick logic checks or minimal experiments | a smaller set of realistic options |
+| Final shortlist | Keep only combinations that remain novel enough, coherent enough, and implementable enough | about 15 viable ideas |
+
 ## What You Get
 
 | Layer | What it does |
