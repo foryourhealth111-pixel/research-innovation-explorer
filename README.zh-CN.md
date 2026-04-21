@@ -13,7 +13,14 @@
 ![搜索优先](https://img.shields.io/badge/搜索优先-search--first-0f766e?style=flat-square)
 ![报告输出](https://img.shields.io/badge/报告输出-Markdown%20%2B%20可视化-7c3aed?style=flat-square)
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/29382407-d331-4c55-a1e3-d46f0d3168bc" width="48%" />
+  <img src="https://github.com/user-attachments/assets/5911cbc0-ef33-49aa-bfce-595922f643fe" width="48%" />
 </div>
+
+</div>
+
+
 
 ## 这个仓库解决什么问题
 
