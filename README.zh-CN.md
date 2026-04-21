@@ -8,6 +8,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
 [![GitHub repo size](https://img.shields.io/github/repo-size/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
+![License: MIT](https://img.shields.io/badge/license-MIT-166534?style=flat-square)
 ![宿主中立](https://img.shields.io/badge/宿主中立-host--neutral-111827?style=flat-square)
 ![搜索优先](https://img.shields.io/badge/搜索优先-search--first-0f766e?style=flat-square)
 ![报告输出](https://img.shields.io/badge/报告输出-Markdown%20%2B%20可视化-7c3aed?style=flat-square)
@@ -211,3 +212,7 @@ python scripts/build_markdown_report.py \
 ## 社区
 
 如果你希望参与更广泛的工具、工作流和 AI 原生构建讨论，可以访问 [linux.do](https://linux.do/)。
+
+## 许可证
+
+本仓库采用 [MIT License](./LICENSE) 开源发布。

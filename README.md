@@ -8,6 +8,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
 [![GitHub repo size](https://img.shields.io/github/repo-size/foryourhealth111-pixel/research-innovation-explorer?style=flat-square)](https://github.com/foryourhealth111-pixel/research-innovation-explorer)
+![License: MIT](https://img.shields.io/badge/license-MIT-166534?style=flat-square)
 ![Host-neutral](https://img.shields.io/badge/host-neutral-111827?style=flat-square)
 ![Search-first](https://img.shields.io/badge/search-first-0f766e?style=flat-square)
 ![Markdown reporting](https://img.shields.io/badge/reporting-markdown%20%2B%20visuals-7c3aed?style=flat-square)
@@ -211,3 +212,7 @@ The bundled example images live in [`assets/examples/llm-training/`](./assets/ex
 ## Community
 
 For broader discussion around tools, workflows, and AI-native building, visit [linux.do](https://linux.do/).
+
+## License
+
+This repository is released under the [MIT License](./LICENSE).
