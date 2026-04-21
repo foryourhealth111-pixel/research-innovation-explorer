@@ -13,6 +13,13 @@
 ![Search-first](https://img.shields.io/badge/search-first-0f766e?style=flat-square)
 ![Markdown reporting](https://img.shields.io/badge/reporting-markdown%20%2B%20visuals-7c3aed?style=flat-square)
 
+
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/712e718c-3521-407c-bae3-1317e5225f8d" width="40%" />
+    <img src="https://github.com/user-attachments/assets/f6028600-eee9-4a09-b80d-f22a6b79347e" width="40%" />
+</div>
+
+
 </div>
 
 ## Why This Exists
