@@ -64,6 +64,7 @@ This is the operational core of the workflow, not a side note. The point is not 
 | `SKILL.md` | Defines the end-to-end workflow and decision rules |
 | `scripts/build_search_queries.py` | Generates structured query packs for topic scan, novelty checks, and failure analysis |
 | `scripts/build_idea_matrix.py` | Builds a scored pairwise candidate matrix from the paper pool |
+| `scripts/build_research_figures.py` | Generates publication-style literature heatmaps, scoring heatmaps, and analysis panels from the research artifacts |
 | `scripts/build_markdown_report.py` | Scaffolds a polished Markdown report with Mermaid visuals, evidence tables, and references |
 | `references/` | Contains the search playbook, theory framing rules, reporting rules, and ethics boundaries |
 | `assets/templates/` | Provides ready-to-use CSV and Markdown templates for search logs, paper pools, idea briefs, experiment plans, and reports |
@@ -131,12 +132,25 @@ python scripts/build_idea_matrix.py \
 
 ### 4. Generate the Markdown report
 
+Generate static figures first when the final research output should include academic paper-style data visuals:
+
+```bash
+python scripts/build_research_figures.py \
+  --paper-pool assets/templates/paper-pool.csv \
+  --idea-matrix work/idea-matrix.csv \
+  --output-dir work/figures \
+  --topic "Long-Context Reasoning" \
+  --prefix long_context
+```
+
 ```bash
 python scripts/build_markdown_report.py \
   --topic "Long-Context Reasoning" \
   --paper-pool assets/templates/paper-pool.csv \
   --idea-matrix work/idea-matrix.csv \
   --search-log assets/templates/search-log.csv \
+  --figure-dir work/figures \
+  --figure-prefix long_context \
   --output work/report.md
 ```
 
@@ -192,6 +206,7 @@ The bundled example images live in [`assets/examples/llm-training/`](./assets/ex
     ├── build_idea_matrix.py
     ├── build_llm_training_example_figures.py
     ├── build_markdown_report.py
+    ├── build_research_figures.py
     └── build_search_queries.py
 ```
 

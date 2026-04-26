@@ -22,11 +22,25 @@ Prefer visuals that live directly inside Markdown:
 - Mermaid pie or simple chart blocks for dataset or venue distributions
 - Markdown tables for evidence maps
 - short callout quotes for key conclusions
+- static PNG/PDF figures generated from the research artifacts when the user needs manuscript-style visuals
 
 If the host cannot render Mermaid:
 
 - keep the table-based evidence maps
 - replace Mermaid with static images or compact prose blocks
+
+## Post-Research Figure Bundle
+
+When the user asks for literature heatmaps, scoring plots, analysis charts, manuscript figures, or academic paper-style data figures, read `references/figure-generation.md` and run `scripts/build_research_figures.py` after `paper_pool.csv` and `idea_matrix.csv` exist.
+
+The default figure bundle should include:
+
+- literature interaction heatmap: average candidate score across paper themes
+- candidate scoring heatmap: normalized scoring dimensions for shortlisted A+B candidates
+- analysis panel: paper years, venue distribution, score distribution, and top candidate scores
+- backing CSVs and a manifest so the plotted data can be audited
+
+Do not treat these figures as proof of novelty. They are visual summaries of the search and scoring artifacts.
 
 ## Recommended Report Structure
 
@@ -84,3 +98,5 @@ Use `scripts/build_markdown_report.py` to generate the first draft. Then refine:
 - tighten the summary
 - replace placeholder sentences with actual reasoning
 - verify that every major claim still has a basis and a citation
+
+If static figures were generated, pass `--figure-dir <dir>` and `--figure-prefix <prefix>` to embed links to the heatmap, scoring figure, and analysis panel.
