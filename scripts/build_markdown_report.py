@@ -21,6 +21,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--search-log", required=True, help="Path to search_log.csv")
     parser.add_argument("--output", required=True, help="Output Markdown path")
     parser.add_argument("--top-k", type=int, default=5, help="Top candidate rows to include")
+    parser.add_argument(
+        "--figure-dir",
+        default="",
+        help="Optional directory produced by scripts/build_research_figures.py",
+    )
+    parser.add_argument(
+        "--figure-prefix",
+        default="research",
+        help="Filename prefix used by scripts/build_research_figures.py",
+    )
     return parser.parse_args()
 
 
@@ -86,12 +96,36 @@ def workflow_mermaid() -> str:
     )
 
 
+def figure_links(figure_dir: str, figure_prefix: str, output_path: Path) -> list[str]:
+    if not figure_dir:
+        return []
+
+    directory = Path(figure_dir).resolve()
+    expected = [
+        ("Literature interaction heatmap", f"{figure_prefix}_literature_heatmap.png"),
+        ("Candidate scoring heatmap", f"{figure_prefix}_candidate_scoring_heatmap.png"),
+        ("Research artifact analysis panel", f"{figure_prefix}_analysis_panel.png"),
+    ]
+    links = []
+    for title, filename in expected:
+        path = directory / filename
+        if not path.exists():
+            continue
+        try:
+            link = path.relative_to(output_path.parent.resolve()).as_posix()
+        except ValueError:
+            link = path.as_posix()
+        links.extend([f"### {title}", "", f"![{title}]({link})", ""])
+    return links
+
+
 def build_report(
     topic: str,
     papers: list[dict[str, str]],
     ideas: list[dict[str, str]],
     searches: list[dict[str, str]],
     top_k: int,
+    post_research_figure_links: list[str],
 ) -> str:
     ideas_sorted = sorted(
         ideas,
@@ -176,6 +210,17 @@ def build_report(
         "",
         venue_pie_block(papers),
         "",
+        *(
+            [
+                "## Post-Research Figures",
+                "",
+                "These static figures summarize the literature landscape, scoring evidence, and artifact distribution from the generated CSVs.",
+                "",
+                *post_research_figure_links,
+            ]
+            if post_research_figure_links
+            else []
+        ),
         "## Search Strategy",
         "",
         "The analysis used a search-first workflow and logged the major queries that shaped the paper pool and later novelty checks.",
@@ -243,9 +288,10 @@ def main() -> int:
     paper_pool = read_csv(Path(args.paper_pool).resolve())
     idea_matrix = read_csv(Path(args.idea_matrix).resolve())
     search_log = read_csv(Path(args.search_log).resolve())
-    report = build_report(topic, paper_pool, idea_matrix, search_log, args.top_k)
-
     output_path = Path(args.output).resolve()
+    figures = figure_links(args.figure_dir, args.figure_prefix, output_path)
+    report = build_report(topic, paper_pool, idea_matrix, search_log, args.top_k, figures)
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(report, encoding="utf-8")
     print(f"Wrote Markdown report to {output_path}")

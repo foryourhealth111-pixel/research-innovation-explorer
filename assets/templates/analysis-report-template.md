@@ -14,6 +14,14 @@ flowchart LR
     D --> E[Report]
 ```
 
+## Post-Research Figures
+
+![Literature interaction heatmap](./figures/research_literature_heatmap.png)
+
+![Candidate scoring heatmap](./figures/research_candidate_scoring_heatmap.png)
+
+![Research artifact analysis panel](./figures/research_analysis_panel.png)
+
 ## Search Strategy
 
 -

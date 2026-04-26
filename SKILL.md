@@ -1,6 +1,6 @@
 ---
 name: research-innovation-explorer
-description: Explore literature-grounded research innovation ideas and paper framing in a host-neutral way. Use when an AI agent needs to collect a recent paper pool, run broad and deep literature search, decompose methods into reusable capabilities, generate A+B or module-combination candidates, shortlist feasible ideas, design a defensible unifying framework, and produce an elegant Markdown report with citations, analysis rationale, and visual summaries.
+description: Explore literature-grounded research innovation ideas and paper framing in a host-neutral way. Use when an AI agent needs to collect a recent paper pool, run broad and deep literature search, decompose methods into reusable capabilities, generate A+B or module-combination candidates, shortlist feasible ideas, design a defensible unifying framework, and produce an elegant Markdown report plus publication-style literature heatmaps, scoring figures, and analysis panels.
 ---
 
 # Research Innovation Explorer
@@ -24,7 +24,8 @@ Use this skill as a host-neutral contract. If the current environment supports n
 7. Read `references/scoring-rubric.md` to shortlist roughly 10-20 promising combinations.
 8. For finalists, read `references/framing-and-theory.md` and write idea briefs with `assets/templates/idea-brief.md`.
 9. Read `references/experiment-plan.md` and draft the validation plan with `assets/templates/experiment-plan.md`.
-10. Read `references/reporting-and-visualization.md` and run `python scripts/build_markdown_report.py ...` to produce the final Markdown report.
+10. Read `references/reporting-and-visualization.md` and `references/figure-generation.md`, then run `python scripts/build_research_figures.py ...` to produce publication-style static figures.
+11. Run `python scripts/build_markdown_report.py ... --figure-dir <figures_dir>` to produce the final Markdown report with figure links when available.
 
 ## Workflow
 
@@ -100,6 +101,8 @@ Use this skill as a host-neutral contract. If the current environment supports n
 ### 9. Produce the Final Report
 
 - Use `references/reporting-and-visualization.md`.
+- Use `references/figure-generation.md` when the user asks for heatmaps, scoring plots, analysis figures, manuscript visuals, or a visual research report.
+- Run `scripts/build_research_figures.py` after `paper_pool.csv` and `idea_matrix.csv` exist. Generate the literature interaction heatmap, candidate scoring heatmap, multi-panel analysis figure, figure data CSVs, and figure manifest.
 - The final Markdown report must include:
   - a readable executive summary
   - visual summaries inside the Markdown document
@@ -117,6 +120,7 @@ Use this skill as a host-neutral contract. If the current environment supports n
 - one chosen idea with a framing note
 - one experiment plan with baselines and ablations
 - one polished Markdown report
+- one post-research figure bundle with literature heatmap, scoring heatmap, analysis panel, figure data, and manifest when visual output is requested
 - optional risk log
 
 ## Decision Rules
@@ -125,7 +129,8 @@ Use this skill as a host-neutral contract. If the current environment supports n
 - If the current host has multiple search surfaces, use at least two independent sources for critical literature assertions.
 - If no search surface exists, state that limitation explicitly and downgrade confidence.
 - Every major claim in the final report must point to a concrete basis: citations, search findings, score evidence, or experiment design logic.
-- Prefer Mermaid, Markdown tables, and compact evidence maps for visuals; fall back to static tables when the host cannot render Mermaid.
+- Prefer Mermaid, Markdown tables, compact evidence maps, and generated static figures for visuals; fall back to static tables when the host cannot render Mermaid or images.
+- Do not generate publication-style figures from invented scores. If fields are sparse, label the figures as screening views and keep the backing data CSV beside each image.
 - Reject any candidate that depends on unavailable code, data, or compute without a fallback plan.
 - Reject any "theory" section that cannot name assumptions, variables, and failure boundaries.
 - Prefer one sharp, testable incremental contribution over three weakly related tweaks.
@@ -142,6 +147,9 @@ Use to turn a structured paper pool into scored pairwise candidates.
 
 ### `scripts/build_markdown_report.py`
 Use to scaffold a polished Markdown report with visual summaries, evidence tables, and references.
+
+### `scripts/build_research_figures.py`
+Use after the paper pool and idea matrix exist to generate publication-style post-research figures: literature interaction heatmap, candidate scoring heatmap, multi-panel analysis figure, backing CSVs, and a figure manifest.
 
 ### `references/host-neutral-usage.md`
 Read to adapt the skill to Codex, Claude Code, Gemini CLI, OpenCode, or a manual workflow.
@@ -163,6 +171,9 @@ Read when drafting baselines, ablations, `alpha` sweeps, and evaluation logic.
 
 ### `references/reporting-and-visualization.md`
 Read when building the final Markdown document and choosing in-document visuals.
+
+### `references/figure-generation.md`
+Read when static, paper-style figures are requested or when the final report should embed generated heatmaps and analysis panels.
 
 ### `references/ethics-boundaries.md`
 Read when novelty, theory, or claim wording is ambiguous.

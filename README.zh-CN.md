@@ -64,6 +64,7 @@
 | `SKILL.md` | 定义完整流程、判断规则与交付要求 |
 | `scripts/build_search_queries.py` | 生成主题扫描、新颖性检查、失败分析等查询包 |
 | `scripts/build_idea_matrix.py` | 从论文池生成组合候选矩阵并评分 |
+| `scripts/build_research_figures.py` | 从研究产物生成论文风格的文献热力图、评分热力图和分析面板图 |
 | `scripts/build_markdown_report.py` | 生成带 Mermaid 图、证据表和参考文献的 Markdown 报告草稿 |
 | `references/` | 放置搜索手册、理论表达规则、报告规范和边界约束 |
 | `assets/templates/` | 提供搜索日志、论文池、idea brief、实验计划和报告模板 |
@@ -131,12 +132,25 @@ python scripts/build_idea_matrix.py \
 
 ### 4. 生成 Markdown 报告
 
+如果最终研究输出需要学术论文风格的数据图，先生成静态图表：
+
+```bash
+python scripts/build_research_figures.py \
+  --paper-pool assets/templates/paper-pool.csv \
+  --idea-matrix work/idea-matrix.csv \
+  --output-dir work/figures \
+  --topic "Long-Context Reasoning" \
+  --prefix long_context
+```
+
 ```bash
 python scripts/build_markdown_report.py \
   --topic "Long-Context Reasoning" \
   --paper-pool assets/templates/paper-pool.csv \
   --idea-matrix work/idea-matrix.csv \
   --search-log assets/templates/search-log.csv \
+  --figure-dir work/figures \
+  --figure-prefix long_context \
   --output work/report.md
 ```
 
@@ -192,6 +206,7 @@ python scripts/build_markdown_report.py \
     ├── build_idea_matrix.py
     ├── build_llm_training_example_figures.py
     ├── build_markdown_report.py
+    ├── build_research_figures.py
     └── build_search_queries.py
 ```
 
