@@ -2,7 +2,7 @@
 
 # Research Innovation Explorer
 
-**A host-neutral, search-first skill for literature-grounded idea discovery, theory framing, and polished Markdown reporting.**
+**Research Innovation Explorer automatically mines feasible research and innovation ideas by combining high-quality papers from top conferences, and selects research solutions that are feasible and have in-depth value through multi-level verification and convergence.**
 
 [中文文档](./README.zh-CN.md)
 
