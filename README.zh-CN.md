@@ -2,7 +2,7 @@
 
 # Research Innovation Explorer
 
-**一个宿主中立、搜索优先的研究创新点探索技能，用于文献驱动的 idea 发现、理论包装与高质量 Markdown 报告生成。**
+**自动化基于顶会优质论文交叉组合挖掘可行科研创新思路，通过多层验证收敛筛选出可落地、具备深挖价值的研究方案。**
 
 [English README](./README.md)
 
