@@ -2,7 +2,7 @@
 
 # Research Innovation Explorer
 
-**Research Innovation Explorer automatically mines feasible research and innovation ideas by combining high-quality papers from top conferences, and selects research solutions that are feasible and have in-depth value through multi-level verification and convergence.**
+**The automated approach leverages the cross-combination of high-quality papers from top conferences to uncover feasible research and innovation ideas. Through multi-level verification and convergence screening, it identifies research schemes that are feasible and have in-depth value.**
 
 [中文文档](./README.zh-CN.md)
 
