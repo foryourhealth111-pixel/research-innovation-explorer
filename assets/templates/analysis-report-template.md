@@ -1,60 +1,82 @@
-# Research Innovation Report: <topic>
+# Research Question Candidate Landscape: <topic>
+
+> Provisional screening artifact for researcher review.
 
 ## Executive Summary
 
--
+- Review coverage:
+- Most promising questions:
+- Main unresolved uncertainty:
+- Recommended researcher action:
 
 ## Visual Overview
 
 ```mermaid
 flowchart LR
-    A[Search Pass] --> B[Paper Pool]
+    A[Search] --> B[Paper Pool]
     B --> C[Idea Matrix]
-    C --> D[Shortlist]
-    D --> E[Report]
+    C --> D[Review Queue]
+    D --> E[Evidence Review]
+    E --> F[Candidate Landscape]
 ```
 
-## Post-Research Figures
+## Review Coverage
 
-![Literature interaction heatmap](./figures/research_literature_heatmap.png)
-
-![Candidate scoring heatmap](./figures/research_candidate_scoring_heatmap.png)
-
-![Research artifact analysis panel](./figures/research_analysis_panel.png)
-
-## Search Strategy
-
--
-
-## Candidate Landscape
-
-| Rank | Candidate | Score | Why It Survived | Refs |
-| --- | --- | --- | --- | --- |
-| 1 |  |  |  |  |
-
-## Recommended Direction
-
--
-
-## Analysis Basis
-
-| Claim | Basis | Support |
+| Item | Coverage | Limitation |
 | --- | --- | --- |
-|  |  |  |
+| Paper pool |  |  |
+| Matrix candidates |  |  |
+| Reviewed candidates |  |  |
+| Source access |  |  |
 
-## Detailed Analysis
+Matrix scores below are queue-priority signals. Qualitative statuses come from source-based candidate review.
 
-### Why the top candidate is interesting
+## Priority Candidates
 
--
+| Candidate | Matrix Score | Status | Confidence | Possible Question | Evidence Basis | Closest Concern | Next Check |
+| --- | ---: | --- | --- | --- | --- | --- | --- |
+|  |  | promising |  |  |  |  |  |
 
-### What could invalidate it
+## Needs Check and Conflicting Evidence
 
--
+| Candidate | Matrix Score | Status | Key Uncertainty or Conflict | Current Evidence | Next Check |
+| --- | ---: | --- | --- | --- | --- |
+|  |  | needs_check |  |  |  |
 
-### What to verify next
+## Parked, Weak, and Excluded Candidates
 
--
+| Candidate | Matrix Score | Status | Status Reason | Reopen When |
+| --- | ---: | --- | --- | --- |
+|  |  |  |  |  |
+
+## Detailed Candidate Evidence
+
+### <candidate_id>
+
+- Papers:
+- Selected direction:
+- Possible question:
+- Why it might matter:
+- Mechanism relation:
+- Status and confidence:
+
+#### Observed Facts
+
+| Fact ID | Statement | Source | Locator |
+| --- | --- | --- | --- |
+| F1 |  |  |  |
+
+#### Agent Inferences
+
+| Inference ID | Interpretation | Supporting Facts |
+| --- | --- | --- |
+| I1 |  | F1 |
+
+#### Open Decision
+
+- Closest concern:
+- Key uncertainty:
+- Next check:
 
 ## References
 

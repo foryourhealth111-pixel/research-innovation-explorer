@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Build a polished Markdown research idea report from CSV artifacts.
-"""
+"""Build a Markdown matrix-overview scaffold from CSV artifacts."""
 
 from __future__ import annotations
 
@@ -13,7 +11,7 @@ from pathlib import Path
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate a Markdown report with visual summaries and references."
+        description="Generate a Markdown matrix-overview scaffold with visuals and references."
     )
     parser.add_argument("--topic", required=True, help="Report topic")
     parser.add_argument("--paper-pool", required=True, help="Path to paper_pool.csv")
@@ -87,10 +85,9 @@ def workflow_mermaid() -> str:
             "    A[Search Pass] --> B[Paper Pool]",
             "    B --> C[Capability Decomposition]",
             "    C --> D[Idea Matrix]",
-            "    D --> E[Shortlist]",
-            "    E --> F[Theory Framing]",
-            "    F --> G[Experiment Plan]",
-            "    G --> H[Markdown Report]",
+            "    D --> E[Review Queue]",
+            "    E --> F[Evidence Review]",
+            "    F --> G[Candidate Landscape]",
             "```",
         ]
     )
@@ -166,18 +163,18 @@ def build_report(
         ref_b = ref_map.get(best.get("paper_b_id", "").strip(), "?")
         evidence_rows = [
             [
-                "Task overlap is actionable",
-                f"Matrix task_overlap={best.get('task_overlap', '')} and benchmark_overlap={best.get('benchmark_overlap', '')}",
+                "Task-overlap screening signal",
+                f"Matrix task_overlap={best.get('task_overlap', '')} and benchmark_overlap={best.get('benchmark_overlap', '')}; verify against the papers",
                 f"[{ref_a}], [{ref_b}]",
             ],
             [
-                "Mechanism complementarity is real",
-                f"Matrix module_diversity={best.get('module_diversity', '')}; rationale={best.get('rationale', '')}",
+                "Mechanism-diversity screening signal",
+                f"Matrix module_diversity={best.get('module_diversity', '')}; source review must establish any functional relationship",
                 f"[{ref_a}], [{ref_b}]",
             ],
             [
-                "Implementation path is plausible",
-                f"open_source_bonus={best.get('open_source_bonus', '')}; hypothesis={best.get('hypothesis_stub', '')}",
+                "Open-source screening signal",
+                f"open_source_bonus={best.get('open_source_bonus', '')}; inspect code, data, compute, and integration requirements before judging friction",
                 f"[{ref_a}], [{ref_b}]",
             ],
             [
@@ -196,9 +193,9 @@ def build_report(
     )
 
     lines = [
-        f"# Research Innovation Report: {topic}",
+        f"# Research Candidate Matrix Overview: {topic}",
         "",
-        "> Generated from the search log, paper pool, and idea matrix. Refine the narrative before final use.",
+        "> Matrix-overview scaffold generated from the search log, paper pool, and idea matrix. Matrix scores are review-priority signals. Add source-based candidate reviews before making research recommendations.",
         "",
         "## Executive Summary",
         "",
@@ -237,25 +234,25 @@ def build_report(
             ["Rank", "Candidate", "Score", "Why It Survived", "Refs"],
         ),
         "",
-        "## Recommended Direction",
+        "## Review Priority",
         "",
-        "Use the highest-scoring candidate only as the current best lead, not as a final claim of novelty.",
+        "Use the highest-scoring candidate as the next matrix-derived review priority. Its research status remains unreviewed until source evidence is recorded.",
         "",
         f"- Lead hypothesis: {summary_text}",
         "",
         "## Analysis Basis",
         "",
-        "Every major claim in the report should trace back to either logged searches, paper metadata, or matrix-derived evidence.",
+        "The rows below explain matrix screening signals. Replace them with located source facts and linked agent inferences during candidate review.",
         "",
         markdown_table(evidence_rows, ["Claim", "Basis", "Support"]),
         "",
         "## Detailed Analysis",
         "",
-        "### Why the top candidate is interesting",
+        "### Why the highest-ranked row entered the review queue",
         "",
-        "- Explain the shared task and why the evaluation space is meaningful.",
-        "- Explain the complementary mechanisms in concrete architectural terms.",
-        "- Explain which weak regime the combination is meant to address.",
+        "- Verify the shared task and evaluation setting against source material.",
+        "- Review both A-to-B and B-to-A directions.",
+        "- Record any mechanism relationship as an inference linked to observed facts.",
         "",
         "### What could invalidate it",
         "",
@@ -265,9 +262,9 @@ def build_report(
         "",
         "### What to verify next",
         "",
-        "- Run a dedicated prior-art search against the exact combination claim.",
-        "- Confirm the baselines and evaluation protocol.",
-        "- Draft the ablations that could falsify the mechanism story.",
+        "- Identify the single uncertainty most likely to change the recommendation.",
+        "- Perform one targeted source, repository, or benchmark check.",
+        "- Add status, confidence, evidence, and a concrete next check using candidate-review.yaml.",
         "",
         "## References",
         "",
@@ -277,6 +274,7 @@ def build_report(
         "",
         "- If the renderer does not support Mermaid, keep the Markdown tables and replace Mermaid blocks with static images or plain-text summaries.",
         "- Before publishing, add any missing DOI, arXiv ID, or canonical project URL.",
+        "- This script does not read candidate-review.yaml; merge reviewed evidence into the final candidate landscape manually.",
         "",
     ]
     return "\n".join(lines)

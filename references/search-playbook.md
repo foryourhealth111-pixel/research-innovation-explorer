@@ -15,7 +15,7 @@ Search is used for four distinct jobs:
 
 ## Minimum Search Pass
 
-Before shortlisting ideas, perform all of these:
+When building the paper pool, cover all of these:
 
 1. broad topic scan
 2. method-family scan
@@ -23,6 +23,8 @@ Before shortlisting ideas, perform all of these:
 4. code and repository scan
 5. novelty check
 6. negative evidence check
+
+During post-matrix review, do not repeat this full pass for every candidate. Search for the single uncertainty most likely to change the current recommendation, record the result, and choose the next action from the updated evidence.
 
 ## Recommended Source Mix
 
@@ -96,6 +98,8 @@ When you draft a claim like:
 
 run another search pass specifically to challenge that claim.
 
+For a provisional candidate question, preserve missing novelty evidence as `prior_art_risk: uncertain` or `unknown`. Do not turn an incomplete search into a novelty conclusion.
+
 ## Search Log Discipline
 
 Log searches in `assets/templates/search-log.csv` with:
@@ -117,5 +121,6 @@ You can stop searching for a candidate when:
 - the evaluation stack is clear
 - the claim is bounded and evidence-backed
 - additional searches mostly repeat known threads
+- the unresolved decision requires researcher input or unavailable access
 
-If these are not true, keep searching.
+When stopping before all uncertainty is resolved, record the remaining uncertainty and the next check in the candidate review.

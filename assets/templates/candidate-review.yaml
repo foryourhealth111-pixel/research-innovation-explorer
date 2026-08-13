@@ -1,0 +1,31 @@
+schema_version: 1
+candidate_id: ""
+papers: []
+matrix_rank:
+matrix_score:
+data_issue:
+
+selected_direction: unknown
+possible_question: ""
+why_it_might_matter: ""
+mechanism_relation: ""
+
+dimensions:
+  task_relation: unknown
+  mechanism_relation: unknown
+  question_clarity: unknown
+  prior_art_risk: unknown
+  implementation_friction: unknown
+
+observed_facts: []
+agent_inferences: []
+
+closest_concern: ""
+key_uncertainty: ""
+next_check: ""
+
+status: unreviewed
+confidence: low
+status_reason: ""
+
+review_log: []

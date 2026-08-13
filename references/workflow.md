@@ -2,50 +2,41 @@
 
 ## Purpose
 
-Use this workflow to search for tractable, literature-grounded incremental research ideas with high implementation leverage.
+Use this workflow to build a literature-grounded candidate landscape that helps a researcher choose which questions deserve further investigation.
 
 ## Inputs to Collect Up Front
 
 - target domain or topic
-- target venue or paper style
-- compute and time budget
-- available codebases, datasets, or benchmarks
-- whether the user wants a concept-only shortlist or a code-ready plan
+- resource and time constraints
+- available codebases, datasets, and benchmarks
+- preferred breadth of the review queue
+- researcher-requested papers or combinations
+- desired output language
 
 ## Step 0: Prepare the Search Pass
 
-Before collecting papers, read `references/search-playbook.md`.
+Read `references/search-playbook.md`, then:
 
-Then:
-
-- create a `search-log.csv` from `assets/templates/search-log.csv`
+- create a working `search-log.csv` from `assets/templates/search-log.csv`
 - generate a starter query pack with `scripts/build_search_queries.py`
-- decide which sources are available in the current host
-- prefer at least two independent search surfaces for important claims
+- identify the search surfaces available in the current host
+- prefer at least two source types for important literature facts
 
 ## Step 1: Build the Paper Pool
 
-Aim for 20-50 recent, strong papers. A smaller set is fine for a quick pass, but the matrix is only useful when the pool is broad enough.
+Aim for 20-50 papers. A smaller set can support a quick exploration, provided the final output states the coverage limitation.
 
-Selection rules:
+Selection guidance:
 
-- prefer recent papers that were actually noticed by the field
-- prefer methods with code or at least reproducible algorithm detail
-- include diverse mechanism families, not just many near-duplicates
-- keep the task family coherent enough that common evaluation is possible
-
-Search requirements:
-
-- run broad topic search
-- run method-family search
-- run benchmark and data search
-- run novelty check for similar combinations
-- run code search for repos and implementations
-- log each meaningful search in `search-log.csv`
+- include recent papers and relevant precursors
+- prefer methods with source code or reproducible algorithm detail
+- include varied mechanism families
+- keep enough task coherence for meaningful comparison
+- include negative results or boundary studies when they change interpretation
 
 Record each paper in `paper-pool.csv` with:
 
-- `paper_id`: short stable id such as `A01`
+- `paper_id`: stable identifier such as `A01`
 - `title`
 - `venue`
 - `year`
@@ -68,11 +59,11 @@ Convert each paper into reusable parts:
 - routing or control logic
 - memory or retrieval subsystem
 - training objective
-- inference trick
+- inference method
 - data or augmentation recipe
 - evaluation advantage
 
-Write these as semicolon-separated fragments so the script can compare them.
+Write comparable concepts as semicolon-separated fragments. Preserve uncertainty in `notes`; do not fill a field with an inferred capability as though the paper stated it.
 
 ## Step 3: Generate the Candidate Matrix
 
@@ -82,71 +73,74 @@ Run:
 python scripts/build_idea_matrix.py paper-pool.csv --output idea-matrix.csv
 ```
 
-This creates a scored pairwise table. Treat it as a triage tool, not as the final judge.
+The matrix enumerates and ranks paper pairs using lightweight textual and metadata signals. Use `total_score` to order review effort. Keep it separate from later qualitative judgment.
 
-If the matrix looks promising too quickly, run another novelty check before trusting it.
+## Step 4: Build the Review Queue
 
-## Step 4: Rapid Technical Triage
+Construct one queue in this order:
 
-Discard candidates with any of these problems:
+1. Take the ten highest-ranked unique paper pairs.
+2. Add up to five remaining pairs that increase coverage across tasks or mechanism families.
+3. Add every researcher-requested pair, regardless of matrix rank.
 
-- no meaningful shared task or benchmark space
-- same mechanism family with no new control variable
-- unavailable code, data, or compute with no practical fallback
-- no clear hypothesis beyond "maybe two good things are better together"
+Treat `(A, B)` and `(B, A)` as the same pair when removing duplicates. Retain the matrix row unchanged and inspect both directions during review.
 
-Keep candidates where:
+If fewer candidates exist, review the available set. If the researcher requests a different queue size, use that size and record the override.
 
-- mechanism complementarity is real
-- one method's strength plausibly addresses the other's weak regime
-- implementation path is clear
-- evaluation can be done with existing baselines
+## Step 5: Check Reviewability
 
-## Step 5: Write Idea Briefs
+Before interpreting a candidate, confirm:
 
-For the strongest 3-5 candidates, use `assets/templates/idea-brief.md`.
+- both paper identifiers resolve to paper-pool rows
+- identifiers are unique
+- the rows are not template or placeholder data
+- titles and source URLs identify real papers
+- the matrix row is readable
 
-Each brief should capture:
+Stop that candidate on broken data, record the issue outside the research-status field, and resume after repair.
 
-- the combined hypothesis
-- why the pairing is complementary
-- the exact control variable or composition pattern
-- what makes the work more than a cosmetic ensemble
-- what failure mode would kill the idea
+## Step 6: Run the Dynamic Review
 
-## Step 6: Build the Framing
+Read `references/post-matrix-review.md` and copy `assets/templates/candidate-review.yaml` for each candidate.
 
-Use `references/framing-and-theory.md`.
+For every candidate:
 
-Good framing patterns:
+1. Verify the relevant task, mechanism, result, and limitation statements against source material.
+2. Examine whether A can address a limitation or open question in B.
+3. Examine whether B can address a limitation or open question in A.
+4. Select `a_to_b`, `b_to_a`, `bidirectional`, or `unknown`.
+5. Express one investigable research question.
+6. Identify the single uncertainty most likely to change the current recommendation.
+7. Perform one focused search, reading, repository inspection, or benchmark comparison.
+8. Add observed facts and source-linked inferences.
+9. Update qualitative dimensions, status, confidence, status reason, and next check.
+10. Repeat only while a new action is likely to change the recommendation.
 
-- one objective family with two limiting cases
-- one controller or gate over two mechanism families
-- one constraint relaxation that recovers earlier methods
-- one two-stage decomposition where each paper occupies a clear role
+## Step 7: Produce the Candidate Landscape
 
-Bad framing patterns:
+Use `references/reporting-and-visualization.md` and `assets/templates/analysis-report-template.md`.
 
-- renaming a weighted sum and calling it a theory
-- claiming universality without assumptions
-- hiding that the contribution is mainly engineering integration
+Group candidates as:
 
-While framing, keep search active. Search again whenever a claim depends on novelty, precedence, or benchmark coverage.
+- promising
+- needs check or conflicting
+- parked, weak, or excluded
 
-## Step 7: Design the Validation Plan
+For each highlighted candidate, show the possible question, observed facts, agent inference, closest concern, unresolved uncertainty, and next check. Display the matrix score as a separate triage signal.
 
-Use `references/experiment-plan.md` and `assets/templates/experiment-plan.md`.
+## Optional Expansion
 
-The plan should prove one of these:
+Proceed only when the researcher asks to deepen a selected candidate:
 
-- better peak quality than both endpoints
-- better quality-cost tradeoff
-- better robustness in the regime the framing predicts
+- framing note: use `references/framing-and-theory.md`
+- validation plan: use `references/experiment-plan.md`
+- screening figures: use `references/figure-generation.md`
+- extended Markdown report: use the report script as a scaffold and merge in reviewed evidence
 
-## Expected Outputs
+## Expected Default Outputs
 
+- one populated `search-log.csv`
 - one populated `paper-pool.csv`
 - one scored `idea-matrix.csv`
-- 3-5 idea briefs
-- one chosen framing note
-- one experiment plan
+- review records for the candidates actually examined
+- one provisional candidate landscape with evidence, uncertainty, and next checks
