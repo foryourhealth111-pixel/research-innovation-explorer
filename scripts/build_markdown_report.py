@@ -186,8 +186,14 @@ def build_report(
     else:
         evidence_rows = [["No candidate available", "Populate idea_matrix.csv first.", "n/a"]]
 
+    lead_candidate = (
+        f"{top_ideas[0].get('paper_a_id', '')} + {top_ideas[0].get('paper_b_id', '')}"
+        if top_ideas
+        else "No candidate available"
+    )
     summary_text = (
-        top_ideas[0].get("hypothesis_stub", "Populate the artifacts and regenerate this report.")
+        f"The matrix currently places {lead_candidate} first in the review queue. "
+        "Its direction and research status remain unreviewed."
         if top_ideas
         else "Populate the artifacts and regenerate this report."
     )
@@ -238,7 +244,7 @@ def build_report(
         "",
         "Use the highest-scoring candidate as the next matrix-derived review priority. Its research status remains unreviewed until source evidence is recorded.",
         "",
-        f"- Lead hypothesis: {summary_text}",
+        f"- Next matrix row to review: {lead_candidate}",
         "",
         "## Analysis Basis",
         "",

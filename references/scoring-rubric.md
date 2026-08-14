@@ -42,6 +42,7 @@ Use this rubric after matrix generation to describe a candidate consistently. Do
 
 ## Status Assignment
 
+- Apply exclusion conditions first. Use `excluded` when located evidence establishes a duplicate question, absence of a shared problem space, or a definite conflict with declared resource constraints, even when the candidate otherwise meets `promising` criteria.
 - `unreviewed`: no review round has started; only matrix information is available
 - `promising`: the question is clear, at least one source-linked mechanism relation supports it, and remaining concerns can be stated concretely
 - `needs_check`: at least one review round has started and a missing fact could materially change the recommendation
