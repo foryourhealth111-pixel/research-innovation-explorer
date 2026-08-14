@@ -20,8 +20,8 @@ For each highlighted candidate, show:
 
 - matrix rank and score as triage signals
 - qualitative status and confidence
-- selected direction
-- possible research question
+- both direction assessments and their supporting inference identifiers
+- selected direction and possible research question or questions
 - observed facts with source locators
 - agent inferences linked to fact identifiers
 - closest concern and key uncertainty

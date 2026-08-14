@@ -1,14 +1,25 @@
 schema_version: 1
 candidate_id: ""
-papers: []
+paper_a_id: ""
+paper_b_id: ""
 matrix_rank:
 matrix_score:
 data_issue:
 
+direction_checks:
+  a_to_b:
+    assessment: unreviewed
+    possible_question: ""
+    key_uncertainty: ""
+    inference_ids: []
+  b_to_a:
+    assessment: unreviewed
+    possible_question: ""
+    key_uncertainty: ""
+    inference_ids: []
+
 selected_direction: unknown
-possible_question: ""
-why_it_might_matter: ""
-mechanism_relation: ""
+selection_inference_ids: []
 
 dimensions:
   task_relation: unknown
@@ -27,5 +38,6 @@ next_check: ""
 status: unreviewed
 confidence: low
 status_reason: ""
+status_inference_ids: []
 
 review_log: []

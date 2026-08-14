@@ -53,12 +53,19 @@ Matrix scores below are queue-priority signals. Qualitative statuses come from s
 
 ### <candidate_id>
 
-- Papers:
+- Paper A:
+- Paper B:
 - Selected direction:
-- Possible question:
-- Why it might matter:
-- Mechanism relation:
+- Selection basis:
 - Status and confidence:
+- Status basis:
+
+#### Direction Checks
+
+| Direction | Assessment | Possible Question | Key Uncertainty | Supporting Inferences |
+| --- | --- | --- | --- | --- |
+| A to B |  |  |  |  |
+| B to A |  |  |  |  |
 
 #### Observed Facts
 

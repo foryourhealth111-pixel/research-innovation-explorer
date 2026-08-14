@@ -51,7 +51,7 @@ Use this rubric after matrix generation to describe a candidate consistently. Do
 - `weak`: at least one targeted review round was completed and no clear, meaningful question emerged
 - `excluded`: located evidence establishes a duplicate question, absence of a shared problem space, or a definite conflict with declared resource constraints
 
-Use `status_reason` to cite the decisive facts or unresolved gap. Matrix rank alone cannot justify any status beyond `unreviewed`.
+Use `status_reason` to explain the decisive evidence or unresolved gap. For a decisive disposition, use `status_inference_ids` to reference the supporting inferences. Matrix rank alone cannot justify any status beyond `unreviewed`.
 
 Once a review round attempts to resolve a candidate and source evidence remains unavailable or incomplete, use `needs_check` with a concrete next action. Reserve `unreviewed` for candidates that have not entered the review loop.
 
