@@ -1,102 +1,76 @@
 # Reporting and Visualization
 
-## Goal
+## Default Goal
 
-Produce a polished Markdown document that is readable, evidence-backed, and visually structured.
+Produce a researcher-facing candidate landscape that makes review priorities, evidence, uncertainty, and next checks easy to inspect. Treat it as a provisional screening artifact.
 
-## Required Output Qualities
+## Required Sections
 
-The final report must include:
+Include:
 
-- a clear executive summary
-- visual summaries inside the Markdown document
-- detailed analysis, not just recommendations
-- explicit analysis basis for each major claim
-- a reference list with stable links
+1. an executive summary of the reviewed landscape
+2. review coverage and important coverage limits
+3. promising candidates
+4. candidates marked `needs_check` or `conflicting`
+5. candidates marked `parked`, `weak`, or `excluded`
+6. detailed evidence records for highlighted candidates
+7. stable source links
+
+For each highlighted candidate, show:
+
+- matrix rank and score as triage signals
+- qualitative status and confidence
+- both direction assessments and their supporting inference identifiers
+- selected direction and possible research question or questions
+- observed facts with source locators
+- agent inferences linked to fact identifiers
+- closest concern and key uncertainty
+- next recommended check
+
+## Separation Rules
+
+- Display matrix score and qualitative judgment in different columns or fields.
+- Describe matrix-derived values as screening signals.
+- Do not use matrix score to establish mechanism complementarity, novelty, feasibility, publishability, or expected success.
+- Distinguish source facts from agent interpretation visually.
+- Preserve support and contrary evidence when sources conflict.
+- Give parked, weak, and excluded candidates a concrete status reason.
 
 ## Preferred Visual Forms
 
-Prefer visuals that live directly inside Markdown:
+Use visuals only when they help compare the landscape:
 
-- Mermaid flowcharts for workflow and logic
-- Mermaid pie or simple chart blocks for dataset or venue distributions
-- Markdown tables for evidence maps
-- short callout quotes for key conclusions
-- static PNG/PDF figures generated from the research artifacts when the user needs manuscript-style visuals
+- Mermaid flowcharts for the review process
+- Markdown tables for candidate and evidence comparison
+- static heatmaps or analysis panels for matrix-level screening patterns
+- compact callouts for consequential uncertainty
 
-If the host cannot render Mermaid:
+Label generated matrix figures as screening views. Keep the backing CSV files beside static figures.
 
-- keep the table-based evidence maps
-- replace Mermaid with static images or compact prose blocks
-
-## Post-Research Figure Bundle
-
-When the user asks for literature heatmaps, scoring plots, analysis charts, manuscript figures, or academic paper-style data figures, read `references/figure-generation.md` and run `scripts/build_research_figures.py` after `paper_pool.csv` and `idea_matrix.csv` exist.
-
-The default figure bundle should include:
-
-- literature interaction heatmap: average candidate score across paper themes
-- candidate scoring heatmap: normalized scoring dimensions for shortlisted A+B candidates
-- analysis panel: paper years, venue distribution, score distribution, and top candidate scores
-- backing CSVs and a manifest so the plotted data can be audited
-
-Do not treat these figures as proof of novelty. They are visual summaries of the search and scoring artifacts.
-
-## Recommended Report Structure
+## Recommended Structure
 
 1. Title
 2. Executive Summary
-3. Visual Overview
-4. Search Strategy
-5. Candidate Landscape
-6. Recommended Direction
-7. Analysis Basis
-8. Detailed Analysis
-9. References
+3. Review Coverage
+4. Priority Candidates
+5. Needs Check and Conflicting Evidence
+6. Parked, Weak, and Excluded Candidates
+7. Detailed Candidate Evidence
+8. References
 
-## Analysis Basis Rules
-
-Every major claim should trace to one or more of:
-
-- search findings
-- paper metadata
-- top-candidate matrix scores
-- explicit experiment design logic
-
-Good examples:
-
-- "Task overlap is actionable because both papers evaluate on the same benchmark family."
-- "Mechanism complementarity is credible because one paper adds memory routing while the other adds verifier control."
-- "Implementation tractability is plausible because code exists for both endpoints."
-
-Bad examples:
-
-- "This seems novel."
-- "This should work well."
-- "The theory is elegant."
-
-Those are conclusions, not bases.
+Use `assets/templates/analysis-report-template.md` as the default structure.
 
 ## Citation Rules
 
-- Give every cited paper a stable reference id such as `[R1]`.
-- Include title, venue, year, and URL when available.
-- Prefer canonical source URLs over random mirrors.
-- If the source is a repo or project page rather than a paper, say that explicitly.
+- Give every cited paper or repository a stable reference identifier.
+- Include title, venue or source type, year, and canonical URL when available.
+- Locate important evidence by section, page, figure, table, appendix, file path, symbol, issue, or commit.
+- State when a source is secondary or when only an abstract was available.
 
-## Writing Style
+## Matrix Overview Scaffold
 
-- Prefer short paragraphs and compact tables.
-- Do not bury caveats.
-- State confidence and boundaries explicitly.
-- Keep the document visually calm: a few strong sections, not dozens of shallow bullets.
+`scripts/build_markdown_report.py` reads `paper-pool.csv`, `idea-matrix.csv`, and `search-log.csv`. Use it to produce a matrix overview, candidate ranking table, figure links, and reference scaffold.
 
-## Scaffolding
+The script does not read `candidate-review.yaml`. After generation, replace its placeholders and matrix-only interpretations with reviewed facts, inferences, statuses, uncertainty, and next checks from the candidate review records.
 
-Use `scripts/build_markdown_report.py` to generate the first draft. Then refine:
-
-- tighten the summary
-- replace placeholder sentences with actual reasoning
-- verify that every major claim still has a basis and a citation
-
-If static figures were generated, pass `--figure-dir <dir>` and `--figure-prefix <prefix>` to embed links to the heatmap, scoring figure, and analysis panel.
+When the user requests publication-style reporting for a selected candidate, expand the document only after the corresponding research review or validation work exists.

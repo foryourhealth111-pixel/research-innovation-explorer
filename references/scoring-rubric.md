@@ -1,62 +1,64 @@
-# Scoring Rubric
+# Qualitative Review Rubric
 
-## Use This Rubric
+## Purpose
 
-Use this rubric after `build_idea_matrix.py` to separate promising pairings from noisy ones.
+Use this rubric after matrix generation to describe a candidate consistently. Do not convert these judgments into a total score. Keep the matrix score as a separate queue-priority signal.
 
-## Core Dimensions
+## Qualitative Dimensions
 
-Score each dimension from 0 to 5.
+### Task Relation
 
-| Dimension | What to ask | Weight |
-| --- | --- | --- |
-| Task overlap | Do both papers operate on the same or adjacent problem? | 0.20 |
-| Mechanism complementarity | Are the mechanisms meaningfully different? | 0.20 |
-| Weakness coverage | Does one paper's strength plausibly address the other's weak regime? | 0.20 |
-| Implementation tractability | Can the pair be built with available code, compute, and data? | 0.15 |
-| Evaluation availability | Can the pair be tested on a shared benchmark stack? | 0.10 |
-| Narrative strength | Can the contribution be expressed as one sharp hypothesis? | 0.10 |
-| Novelty headroom | Is there still room after accounting for recent related work? | 0.05 |
+- `close`: both papers address the same task or a directly shared operating regime
+- `adjacent`: the tasks differ, with a source-supported shared subproblem or transfer setting
+- `loose`: the connection depends mainly on broad topic similarity
+- `unknown`: the available sources do not establish the relationship
 
-## Penalties
+### Mechanism Relation
 
-Subtract penalties when these apply:
+- `complementary`: located evidence supports a distinct role for each mechanism in the proposed question
+- `partly_complementary`: one useful connection is supported, while scope or direction remains uncertain
+- `unclear`: textual difference exists without enough evidence for functional complementarity
+- `unknown`: relevant mechanism detail has not been verified
 
-- `-2`: same mechanism family with mostly superficial changes
-- `-2`: no code or realistic reproduction path
-- `-1`: evaluation stack mismatch is painful but still solvable
-- `-2`: no honest framing path beyond direct stitching
+### Question Clarity
 
-## Fast Prune Rules
+- `clear`: setting, mechanism, limitation, and observable outcome can be stated concretely
+- `vague`: at least one essential element remains too broad for a focused follow-up
+- `unknown`: source coverage is insufficient to form the question
 
-Kill a candidate immediately if:
+### Prior-Art Risk
 
-- the combined claim depends on unavailable infrastructure
-- the central evaluation cannot be defined clearly
-- the only plausible story is benchmark cherry-picking
-- the control variable cannot be described in one sentence
+- `low`: a targeted search mapped nearby work and found a distinguishable question within the searched scope
+- `uncertain`: search coverage is incomplete or nearby work may overlap
+- `high`: a source describes the same combination or substantially the same research question
+- `unknown`: no targeted prior-art check has been completed
 
-## Shortlist Bands
+### Implementation Friction
 
-- `4.2-5.0`: strong candidate, write a full brief
-- `3.5-4.1`: keep for secondary review
-- `2.8-3.4`: only keep if there is strategic value or an unusually easy implementation path
-- `<2.8`: drop
+- `low`: compatible code, data, evaluation, and resource requirements are documented
+- `medium`: one material integration or resource issue remains
+- `high`: several material dependencies are missing or exceed declared constraints
+- `unknown`: implementation requirements have not been checked
 
-## What Usually Survives
+## Status Assignment
 
-Strong candidates tend to look like:
+- Apply exclusion conditions first. Use `excluded` when located evidence establishes a duplicate question, absence of a shared problem space, or a definite conflict with declared resource constraints, even when the candidate otherwise meets `promising` criteria.
+- `unreviewed`: no review round has started; only matrix information is available
+- `promising`: the question is clear, at least one source-linked mechanism relation supports it, and remaining concerns can be stated concretely
+- `needs_check`: at least one review round has started and a missing fact could materially change the recommendation
+- `conflicting`: credible sources support incompatible interpretations that matter to the recommendation
+- `parked`: the direction may have value, while current priority or resource conditions favor other candidates
+- `weak`: at least one targeted review round was completed and no clear, meaningful question emerged
+- `excluded`: located evidence establishes a duplicate question, absence of a shared problem space, or a definite conflict with declared resource constraints
 
-- same task, different mechanism families
-- one method expands coverage, one improves precision or efficiency
-- both have code and compatible evaluation
-- one simple control variable explains the combination
+Use `status_reason` to explain the decisive evidence or unresolved gap. For a decisive disposition, use `status_inference_ids` to reference the supporting inferences. Matrix rank alone cannot justify any status beyond `unreviewed`.
 
-## What Usually Fails
+Once a review round attempts to resolve a candidate and source evidence remains unavailable or incomplete, use `needs_check` with a concrete next action. Reserve `unreviewed` for candidates that have not entered the review loop.
 
-Weak candidates tend to look like:
+## Data Problems
 
-- same task, same module, new wording only
-- no shared evaluation space
-- three different ideas forced into one narrative
-- theoretical language added after the fact without a real abstraction
+Data-integrity failures are processing issues. Record them in `data_issue`, leave the research status as `unreviewed`, repair the source data, clear the issue, and restart the review.
+
+## Revisions
+
+All research statuses may be reopened. Preserve the review log so a researcher can see which evidence changed the judgment.

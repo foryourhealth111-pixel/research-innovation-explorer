@@ -115,11 +115,15 @@ def load_papers(path: Path) -> list[dict[str, object]]:
             raise ValueError(f"Missing required columns: {missing_list}")
 
         papers = []
+        seen_ids: set[str] = set()
         for row in reader:
             paper_id = row.get("paper_id", "").strip()
             title = row.get("title", "").strip()
             if not paper_id or not title:
                 continue
+            if paper_id in seen_ids:
+                raise ValueError(f"Duplicate paper_id: {paper_id}")
+            seen_ids.add(paper_id)
             papers.append(
                 {
                     "paper_id": paper_id,
@@ -139,6 +143,7 @@ def load_papers(path: Path) -> list[dict[str, object]]:
                     "benchmark_tokens": tokenize(row.get("benchmarks", "")),
                 }
             )
+        papers.sort(key=lambda paper: str(paper["paper_id"]))
         return papers
 
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Innovation Explorer"
-  short_description: "Search-first ideas with reports and figures"
-  default_prompt: "Use $research-innovation-explorer to search broadly, score A+B candidates, and produce a cited Markdown report with publication-style research figures."
+  short_description: "Evidence-grounded research question screening"
+  default_prompt: "Use $research-innovation-explorer to build a paper matrix, review candidate directions with evidence, and produce a provisional research-question shortlist."

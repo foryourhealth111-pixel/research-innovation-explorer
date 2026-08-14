@@ -1,0 +1,43 @@
+schema_version: 1
+candidate_id: ""
+paper_a_id: ""
+paper_b_id: ""
+matrix_rank:
+matrix_score:
+data_issue:
+
+direction_checks:
+  a_to_b:
+    assessment: unreviewed
+    possible_question: ""
+    key_uncertainty: ""
+    inference_ids: []
+  b_to_a:
+    assessment: unreviewed
+    possible_question: ""
+    key_uncertainty: ""
+    inference_ids: []
+
+selected_direction: unknown
+selection_inference_ids: []
+
+dimensions:
+  task_relation: unknown
+  mechanism_relation: unknown
+  question_clarity: unknown
+  prior_art_risk: unknown
+  implementation_friction: unknown
+
+observed_facts: []
+agent_inferences: []
+
+closest_concern: ""
+key_uncertainty: ""
+next_check: ""
+
+status: unreviewed
+confidence: low
+status_reason: ""
+status_inference_ids: []
+
+review_log: []

@@ -1,182 +1,75 @@
 ---
 name: research-innovation-explorer
-description: Explore literature-grounded research innovation ideas and paper framing in a host-neutral way. Use when an AI agent needs to collect a recent paper pool, run broad and deep literature search, decompose methods into reusable capabilities, generate A+B or module-combination candidates, shortlist feasible ideas, design a defensible unifying framework, and produce an elegant Markdown report plus publication-style literature heatmaps, scoring figures, and analysis panels.
+description: Build literature-grounded research-question candidate landscapes by collecting papers, generating A+B matrices, and dynamically reviewing combinations with traceable evidence, uncertainty, and next checks. Use when an AI agent needs to explore a field, screen research questions, compare paper combinations, inspect prior art, or prepare a provisional shortlist for researcher review.
 ---
 
 # Research Innovation Explorer
 
-## Overview
+## Purpose
 
-Use this skill to turn a vague "find a publishable idea" request into a disciplined workflow: search broadly, collect strong recent papers, decompose them into reusable capabilities, generate structured candidate combinations, and draft an honest framing plus experiment plan.
+Help a researcher decide which literature-grounded questions deserve more attention. Search broadly, structure a paper pool, generate an A+B matrix, and review selected candidates against source evidence.
 
-Treat this as efficient incremental research planning. Stand on strong prior work, keep claims proportional to evidence, and prefer explicit assumptions over inflated novelty language.
+Stop the default workflow at a provisional candidate landscape. Do not present matrix rankings as novelty, feasibility, publishability, or expected research success. Expand a researcher-selected candidate into theory framing, an experiment plan, or a publication-oriented report only when requested.
 
-Use this skill as a host-neutral contract. If the current environment supports native Skills, load it with the host's own mechanism. If the environment does not support Skills, follow `SKILL.md`, `references/`, and `scripts/` directly.
+Use this skill as a host-neutral contract. Adapt search and browsing actions to the tools available in the current environment.
 
-## Quick Start
+## Default Workflow
 
-1. Clarify the domain, target venue, resource limits, and whether the user wants concept-only output or a code-ready shortlist.
-2. Read `references/host-neutral-usage.md` and adapt invocation to the current host.
-3. Read `references/search-playbook.md`, then copy `assets/templates/search-log.csv` to a working file.
-4. Run `python scripts/build_search_queries.py --topic "<topic>" --keywords "<comma-separated keywords>"` to generate a search pack.
-5. Search across multiple sources, log results, and fill `assets/templates/paper-pool.csv` with 20-50 strong papers.
-6. Run `python scripts/build_idea_matrix.py <paper_pool.csv> --output <idea_matrix.csv>` to generate pairwise candidates.
-7. Read `references/scoring-rubric.md` to shortlist roughly 10-20 promising combinations.
-8. For finalists, read `references/framing-and-theory.md` and write idea briefs with `assets/templates/idea-brief.md`.
-9. Read `references/experiment-plan.md` and draft the validation plan with `assets/templates/experiment-plan.md`.
-10. Read `references/reporting-and-visualization.md` and `references/figure-generation.md`, then run `python scripts/build_research_figures.py ...` to produce publication-style static figures.
-11. Run `python scripts/build_markdown_report.py ... --figure-dir <figures_dir>` to produce the final Markdown report with figure links when available.
+1. Clarify the topic, resource constraints, available data or code, and the desired breadth of the candidate landscape.
+2. Read `references/search-playbook.md`, create a working `search-log.csv`, and generate a starter query pack with `scripts/build_search_queries.py`.
+3. Build a 20-50 paper pool and normalize each paper into tasks, mechanisms, strengths, weaknesses, benchmarks, and implementation signals. Read `references/workflow.md` for intake rules.
+4. Run `scripts/build_idea_matrix.py` to generate `idea-matrix.csv`. The script rejects duplicate paper identifiers and orders papers by identifier so each pair has stable A/B roles.
+5. Treat matrix scores only as queue-priority signals. Build the review queue from the ten highest-ranked unique pairs, up to five coverage-increasing pairs, and every researcher-requested pair.
+6. Read `references/post-matrix-review.md` and `references/scoring-rubric.md`. Copy `assets/templates/candidate-review.yaml` for each candidate under review.
+7. Complete both entries under `direction_checks`. Select a direction only after both `A -> B` and `B -> A` have been assessed.
+8. In each review round, identify the single uncertainty most likely to change the recommendation. Perform one focused action, then update facts, inferences, the relevant direction check, decision-linked inference identifiers, status, confidence, and the next check.
+9. Validate each populated review with `scripts/validate_candidate_review.py` before including it in the candidate landscape.
+10. Stop when further searching mainly repeats known information, a status is adequately supported, or the next decision requires researcher input. Preserve unresolved uncertainty in the record.
+11. Produce a candidate landscape using `references/reporting-and-visualization.md` and `assets/templates/analysis-report-template.md`.
 
-## Workflow
+## Candidate Review Rules
 
-### 1. Use Search Aggressively and Systematically
+- Verify source facts before interpreting a pairing.
+- Preserve the canonical `paper_a_id`, `paper_b_id`, and `candidate_id` defined by the matrix order.
+- Record observed facts separately from agent inferences.
+- Give every observed fact a stable source URL and a section, page, figure, table, or repository location.
+- Link every inference to the fact identifiers that support it.
+- Link each non-unknown direction assessment, selected direction, and decisive research status to inference identifiers.
+- Use `unknown` only for direction or dimension fields. Use `needs_check` or `conflicting` for research status when evidence warrants them.
+- Keep matrix score and qualitative review judgment separate. Do not calculate a second aggregate score.
+- Reopen any research judgment when new evidence changes the basis.
+- Stop review on broken input data and resume after the data is repaired.
 
-- Treat search as mandatory during both collection and analysis, not as an optional helper.
-- Use the best search surfaces available in the current environment: web search, browse tools, academic search APIs, paper databases, official docs, code search, and repository search.
-- Search at multiple depths:
-  - broad topic scan
-  - targeted method scan
-  - benchmark and dataset scan
-  - citation chaining
-  - negative evidence and failure-case scan
-  - code and implementation scan
-- Read `references/search-playbook.md` before collecting papers or writing any analysis.
+## Default Deliverables
 
-### 2. Build the Paper Pool
+- `search-log.csv`
+- `paper-pool.csv`
+- `idea-matrix.csv`
+- one `candidate-review.yaml` per reviewed candidate
+- one candidate-landscape Markdown document covering promising, unresolved, parked, weak, and excluded candidates
+- optional screening figures when visual comparison is useful
 
-- Prefer 20-50 recent, strong, code-accessible papers with real downstream impact.
-- Record `task`, `modules`, `strengths`, `weaknesses`, `benchmarks`, and `open_source` for each paper.
-- Mix academic papers with strong open-source or industry systems only when they change the practical frontier.
-- Read `references/workflow.md` for sourcing rules and intake guidance.
+## Optional Expansion
 
-### 3. Decompose Papers into Capabilities
+After the researcher selects a candidate:
 
-- Rewrite each paper as reusable components, not paper titles.
-- Separate task from mechanism: objective, backbone, routing, memory, loss, training recipe, inference trick, evaluator, or data recipe.
-- Normalize fields so pairwise comparisons are meaningful.
+- read `references/framing-and-theory.md` for a framing note
+- read `references/experiment-plan.md` and use `assets/templates/experiment-plan.md` for a validation plan
+- use `scripts/build_research_figures.py` for screening visualizations
+- use `scripts/build_markdown_report.py` only as a matrix-overview scaffold, then add the candidate-review evidence manually
 
-### 4. Generate Candidate Combinations
-
-- Use `scripts/build_idea_matrix.py` for a first-pass matrix.
-- Keep combinations where task overlap is real, mechanisms are complementary, and implementation remains tractable.
-- Kill combinations that are purely cosmetic, redundant, or impossible to evaluate with available code and data.
-- Read `references/scoring-rubric.md` when the shortlist is noisy or overfull.
-
-### 5. Write the Innovation Hypothesis
-
-- State the claim as a falsifiable hypothesis, not a slogan.
-- Prefer forms like:
-  - "Method A supplies X that method B lacks under condition C."
-  - "A unified controller over A-style and B-style mechanisms should dominate each extreme on regime R."
-  - "A shared objective reveals A and B as limiting cases of a broader family."
-- Write why the combination should help, what assumption it needs, and where it can fail.
-
-### 6. Frame the Theory Honestly
-
-- Use `references/framing-and-theory.md` before writing any framework section.
-- Build a higher-level abstraction only if you can define the latent variable, control knob, objective decomposition, or limiting cases clearly.
-- Claim "A and B are special cases" only when the algebra or algorithm really supports it.
-- If the work is primarily a strong engineering combination, say so and focus on mechanism plus evidence rather than pretending to have a theorem.
-- Read `references/ethics-boundaries.md` whenever claim wording becomes fuzzy.
-
-### 7. Analyze with Search Still Active
-
-- Continue searching during analysis. Do not stop at the first literature dump.
-- Search for:
-  - adjacent methods that may invalidate the novelty claim
-  - older precursor work
-  - replication failures
-  - benchmark caveats
-  - engineering reports or repos that already tried a similar combination
-- If the claim changes after new evidence, revise the framing instead of defending the old one.
-
-### 8. Design Proof of Non-Triviality
-
-- Use `references/experiment-plan.md`.
-- Always compare against A, B, and the naive composition baseline.
-- If using a fusion weight such as `alpha`, sweep the full range rather than cherry-picking one middle value.
-- Measure quality, cost, robustness, and failure modes.
-- Require at least one ablation that can falsify the claimed mechanism.
-
-### 9. Produce the Final Report
-
-- Use `references/reporting-and-visualization.md`.
-- Use `references/figure-generation.md` when the user asks for heatmaps, scoring plots, analysis figures, manuscript visuals, or a visual research report.
-- Run `scripts/build_research_figures.py` after `paper_pool.csv` and `idea_matrix.csv` exist. Generate the literature interaction heatmap, candidate scoring heatmap, multi-panel analysis figure, figure data CSVs, and figure manifest.
-- The final Markdown report must include:
-  - a readable executive summary
-  - visual summaries inside the Markdown document
-  - detailed analysis, not only conclusions
-  - explicit analysis basis
-  - a reference list with stable links
-- Use `scripts/build_markdown_report.py` to scaffold the document, then refine it.
-
-## Deliverables
-
-- `search_log.csv`
-- `paper_pool.csv`
-- `idea_matrix.csv`
-- 3-5 shortlisted idea briefs
-- one chosen idea with a framing note
-- one experiment plan with baselines and ablations
-- one polished Markdown report
-- one post-research figure bundle with literature heatmap, scoring heatmap, analysis panel, figure data, and manifest when visual output is requested
-- optional risk log
-
-## Decision Rules
-
-- If the current host has search or browse tools, use them before relying on memory for current literature claims.
-- If the current host has multiple search surfaces, use at least two independent sources for critical literature assertions.
-- If no search surface exists, state that limitation explicitly and downgrade confidence.
-- Every major claim in the final report must point to a concrete basis: citations, search findings, score evidence, or experiment design logic.
-- Prefer Mermaid, Markdown tables, compact evidence maps, and generated static figures for visuals; fall back to static tables when the host cannot render Mermaid or images.
-- Do not generate publication-style figures from invented scores. If fields are sparse, label the figures as screening views and keep the backing data CSV beside each image.
-- Reject any candidate that depends on unavailable code, data, or compute without a fallback plan.
-- Reject any "theory" section that cannot name assumptions, variables, and failure boundaries.
-- Prefer one sharp, testable incremental contribution over three weakly related tweaks.
-- If evidence supports only a narrow regime, say so explicitly.
-- Do not fabricate novelty, proofs, citations, experimental wins, or reference metadata.
+Keep all claims proportional to the available evidence. Read `references/ethics-boundaries.md` whenever wording about novelty, theory, or expected results becomes stronger than the sources support.
 
 ## Resources
 
-### `scripts/build_search_queries.py`
-Use to generate query packs for topic scan, method scan, novelty checks, benchmark checks, and failure analysis.
-
-### `scripts/build_idea_matrix.py`
-Use to turn a structured paper pool into scored pairwise candidates.
-
-### `scripts/build_markdown_report.py`
-Use to scaffold a polished Markdown report with visual summaries, evidence tables, and references.
-
-### `scripts/build_research_figures.py`
-Use after the paper pool and idea matrix exist to generate publication-style post-research figures: literature interaction heatmap, candidate scoring heatmap, multi-panel analysis figure, backing CSVs, and a figure manifest.
-
-### `references/host-neutral-usage.md`
-Read to adapt the skill to Codex, Claude Code, Gemini CLI, OpenCode, or a manual workflow.
-
-### `references/search-playbook.md`
-Read before literature collection or analysis. This is the search-first operating procedure.
-
-### `references/workflow.md`
-Read for the detailed step-by-step process and intake rules.
-
-### `references/scoring-rubric.md`
-Read when ranking candidates or pruning the matrix.
-
-### `references/framing-and-theory.md`
-Read when writing the "framework", "special case", or "general expression" sections.
-
-### `references/experiment-plan.md`
-Read when drafting baselines, ablations, `alpha` sweeps, and evaluation logic.
-
-### `references/reporting-and-visualization.md`
-Read when building the final Markdown document and choosing in-document visuals.
-
-### `references/figure-generation.md`
-Read when static, paper-style figures are requested or when the final report should embed generated heatmaps and analysis panels.
-
-### `references/ethics-boundaries.md`
-Read when novelty, theory, or claim wording is ambiguous.
-
-### `assets/templates/`
-Copy the templates instead of inventing ad hoc tables.
+- `references/workflow.md`: paper intake, matrix generation, queue construction, and default outputs
+- `references/search-playbook.md`: search objectives, source selection, logging, and stopping rules
+- `references/post-matrix-review.md`: dynamic review loop, evidence records, statuses, and failure handling
+- `references/scoring-rubric.md`: qualitative dimensions and state assignment
+- `references/reporting-and-visualization.md`: candidate-landscape reporting rules
+- `references/framing-and-theory.md`: optional framing guidance for selected candidates
+- `references/experiment-plan.md`: optional experiment planning guidance
+- `references/ethics-boundaries.md`: claim and evidence boundaries
+- `assets/templates/candidate-review.yaml`: stable review record interface
+- `assets/templates/analysis-report-template.md`: researcher-facing candidate landscape
+- `scripts/validate_candidate_review.py`: deterministic candidate identity and evidence-link validation

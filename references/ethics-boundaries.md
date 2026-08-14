@@ -2,7 +2,7 @@
 
 ## Default Stance
 
-Treat this workflow as a way to find efficient, grounded incremental research ideas. Do not demean incremental work, and do not inflate it.
+Treat this workflow as a way to discover and screen grounded research questions. Keep judgments provisional and useful to the researcher.
 
 ## Allowed
 
@@ -32,9 +32,9 @@ That tone is legitimate. What is not legitimate is overstating novelty or certai
 
 ## If the Evidence Is Weak
 
-- narrow the claim
-- report the boundary
-- reposition the contribution
-- or drop the idea
+- record the missing or conflicting evidence
+- use `needs_check`, `conflicting`, `parked`, or `weak` as appropriate
+- state the next check most likely to change the judgment
+- stop when further search mainly repeats known information
 
-Do not use wording to compensate for missing evidence.
+Do not use wording to compensate for missing evidence. Preserve `unknown` when the available material does not support a conclusion.
